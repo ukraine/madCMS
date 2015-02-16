@@ -935,13 +935,21 @@ function getSiteMap () {
 // Список функций для конкретного сайта
 //
 
-function generateTopNavigationMenu($footer="",$starttag="",$endtag="", $getID="") {
+
+function convertGetIdIntoPlainVar ($getID="") {
+
+	if (!empty($_GET['id'])) $getID = $_GET['id'];
+	return $getID;
+
+}
+
+function generateTopNavigationMenu($footer="",$starttag="",$endtag="") {
 
 	//	DATE ADDED: 27.12.2007
 
 	global $siteurl, $Settings, $link;
 
-	if (!empty($_GET['id'])) $getID = $_GET['id'];
+	$getID = convertGetIdIntoPlainVar();
 
 	$divTagStart = $divTagEnd = "";
 
@@ -987,7 +995,7 @@ function GetMicroTime() {
 }
 
 
-function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", $SourceOrTarget="source_id", $stlimit="0",$cat="") {
+function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", $SourceOrTarget="source_id", $stlimit="0",$cat="", $getID="") {
 
 	global $Settings, $startlimit, $link;
 
@@ -999,6 +1007,8 @@ function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", 
 	//	DATE MODDED:	29.03.2008 isSelect added & $key parametr
 
 	// queries format: table, additional query, limitation, ,order by
+
+	$getID = convertGetIdIntoPlainVar();
 
 	$queries = array(
 
@@ -1012,13 +1022,13 @@ function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", 
 		"services"		=> array("pages","AND `parent_id` = '9'",5),
 		"languages"		=> array("languages","","","`name` ASC"),
 		"lngselectlist"	=> array("languages","","","`priority` DESC, `name` ASC"),
-		"quicklinks"	=> array("pages","AND `advertise` = '1' AND `id` != $_GET[id]", 5),
-		"generateindex"	=> array("pages","AND `parent_id` = $_GET[id]"),
-		"generateSvcs"	=> array("pages","AND `parent_id` = $_GET[id] AND `category` = '$cat'"),
+		"quicklinks"	=> array("pages","AND `advertise` = '1' AND `id` != '$getID'", 5),
+		"generateindex"	=> array("pages","AND `parent_id` = '$getID'"),
+		"generateSvcs"	=> array("pages","AND `parent_id` = '$getID' AND `category` = '$cat'"),
 		"paymenttypes"  => array("paymenttypes",""),
 		"links"			=> array("links","",$Settings['itemsonlinkspage'],"",$startlimit),
 		"expos"			=> array("expos"," AND `city` != 'Moscow' AND `country` = 'Russia' ",$Settings['itemsonlinkspage'],"",$startlimit),
-		"relatedpages"	=> array("pages","AND `parent_id` = '9' AND `id` != $_GET[id]","",'RAND()'),
+		"relatedpages"	=> array("pages","AND `parent_id` = '9' AND `id` != '" . convertGetIdIntoPlainVar() . "","",'RAND()'),
 		"tests"			=> array("tests","AND `testtranslation` !='' AND `test_id` = '$_GET[test_id]' AND `rate` = '$_GET[rate]'"),
 
 		);
