@@ -1,0 +1,45 @@
+<form action="" method="post">
+  <table width="80%" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td width="4%"  class="zagolovor" rowspan=2 style='text-align:center;'><input type="checkbox" style="width:auto;" onClick="setCheckboxesByType(this.checked)"></td>
+	<td width="11%" class="zagolovor" rowspan=2><?=$translation['67'];?></td>
+	<td width="43%" class="zagolovor" rowspan=2><?=$translation['63'];?></td>
+	<td width="8%" class="zagolovor" rowspan=2><?=$translation['28'];?></td>
+	<td width="8%" class="zagolovor" rowspan=2><?=$translation['29'];?></td>
+	<td width="20%" class="zagolovor" colspan=2 id="finita"><?=$translation['30'];?></td>
+  </tr>  
+
+  <tr>
+    <td width="10%" class="zagolovor" id="fin"><?=$translation['31'];?></td>
+    <td width="10%" class="zagolovor" id="fin"><?=$translation['32'];?></td>
+  </tr>
+
+
+<?
+
+for ($i=0; $i < mysql_num_rows($res); $i++)
+	
+	{
+	echo "<tr>";
+	
+	$f = mysql_fetch_array($res);
+
+	$content = limitVisiblePart('content',48);
+	$title = limitVisiblePart('title',48);
+
+	echo "\n<td class='columns1' id='center'><input type='checkbox' name='id[$i]' value='$f[id]' style='width:auto;'></td>" .
+	"\n<td class='columns1'>" . $f['timestamp'] . "</td>" .
+	"\n<td class='columns1' style='text-align:left;'><B>$title</B><br>$content</td>" .
+	"\n\t<td class='columns1' id='center'>"; include "inc/priority.html"; echo "<div id='priority{$f['id']}'></div></td>" .
+	"\n\t<td class='columns1' id='center'>"; include "inc/visibility.html"; echo "<div id='visibility{$f['id']}'></div></td>" .
+	"\n<td class='columns1'><a href='edit/$f[id]' class='edit'>$translation[31]</a></td>" .
+	"\n<td class='columns1'><a href='delete/$f[id]' class='delete' onclick='return confirmDelete()'>$translation[32]</a></td>" .
+
+	"</tr>";
+	}
+
+?>
+</table>
+<input type="hidden" name="action" value="massactiontoobjects">
+<input type="submit" value="<?=$translation['148'];?>" class="auto">	
+</form>

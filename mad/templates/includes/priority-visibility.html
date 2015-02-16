@@ -1,0 +1,26 @@
+		<h3><?=$translation['38'];?>:</h3>
+			
+			<div class="radio">
+
+					<input type="radio" name="priority" value="0" id="0"<? radiobox('priority', 0) ?>><label for="0"> &#151; 0 &nbsp; </label>				
+					<input type="radio" name="priority" value="1" id="1"<? radiobox('priority', 1) ?>><label for="1"> &#151; 1 &nbsp; </label>
+					<input type="radio" name="priority" value="2" id="2"<? radiobox('priority', 2) ?>><label for="2"> &#151; 2 &nbsp; </label>
+					<input type="radio" name="priority" value="3" id="3"<? radiobox('priority', 3) ?>><label for="3"> &#151; 3 &nbsp; </label>
+					<input type="radio" name="priority" value="4" id="4"<? radiobox('priority', 4) ?>><label for="4"> &#151; 4 &nbsp; </label>
+					<input type="radio" name="priority" value="5" id="5"<? radiobox('priority', 5) ?>><label for="5"> &#151; 5 &nbsp; </label>
+					<input type="radio" name="priority" value="6" id="6"<? radiobox('priority', 6) ?>><label for="6"> &#151; 6 &nbsp; </label>
+					<input type="radio" name="priority" value="7" id="7"<? radiobox('priority', 7) ?>><label for="7"> &#151; 7 &nbsp; </label>
+					<input type="radio" name="priority" value="8" id="8"<? radiobox('priority', 8) ?>><label for="8"> &#151; 8 &nbsp; </label>
+					<input type="radio" name="priority" value="9" id="9"<? radiobox('priority', 9) ?>><label for="9"> &#151; 9 &nbsp; </label>
+
+					<span id="grey">(<?=$translation['39'];?>)</span>			
+				
+			</div>
+				
+		<h3><?=$translation['29'];?>:</h3>
+
+			<select name='visibility' style="width: auto;">
+				<option value='y' <? select('visibility', 'y'); ?>><?=$translation['24'];?></option>
+				<option value='n' <? select('visibility', 'n'); ?>><?=$translation['25'];?></option>
+				<option value='d' <? select('visibility', 'd'); ?>><?=$translation['26'];?></option>
+			</select><br>

@@ -1,0 +1,12 @@
+<H3><?=$translation['135'];?></H3>
+
+<p>
+<B><?=$translation['171'];?></B>: <? echo PREFIX ?><br>
+<B><?=$translation['172'];?></B>: ALTER TABLE `pages` ADD `service_parent_id` INT( 3 ) NOT NULL AFTER `cat_id` ;
+</p>
+
+<form method="post" action="" name="form">
+<? GenerateTextAreaTag("sql"); ?>
+<input type="submit" value="<?=$translation['136'];?>">
+<input type="hidden" value="do_runquery" name="action">
+</form>

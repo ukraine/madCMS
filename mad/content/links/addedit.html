@@ -1,0 +1,33 @@
+<form method="post" action="">
+        
+		<h3 id="first"><?=$translation['62'];?>:</h3>
+
+		<? 
+
+		echo "&nbsp; &nbsp; &nbsp; &nbsp; изм. $f[timestamp]<br><br>";
+
+		GenerateInputTag("name","Name");
+		GenerateInputTag("email","Email");
+		GenerateInputTag("contacturl","Contact URL");
+		GenerateInputTag("phone","Phone");
+		?> 
+
+		<h3>Link details:</h3>
+
+		<? 
+		GenerateInputTag("title","Title");
+		GenerateInputTag("description","Description <span id='grey'>( 255 chars)</span>");
+		GenerateInputTag("url","URL <span id='grey'>(max 255 chars)</span>");
+		GenerateInputTag("backurl","Reciprocal URL <span id='grey'>(max 255 chars)</span>");
+		GenerateInputTag("ourlink","Our link <span onclick='setOurLink(0)' class='setourlink'>ifstran</span> or <span onclick='setOurLink(1)'  class='setourlink'>1tra</span>");
+
+		$TranslatorPaymentStatusCheckBox = array("autocheck" => "Check here if the link should be checked automatically");
+		GenerateCheckBox($TranslatorPaymentStatusCheckBox,"","","style='width:auto;'");
+
+		GenerateInputTag("autocheck","","hidden");
+		include "templates/includes/priority-visibility.html";
+		include "templates/includes/formend.html";
+
+		?>
+</form>
+

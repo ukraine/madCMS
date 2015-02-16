@@ -1,0 +1,200 @@
+	  <table>
+
+	<tr>
+		<td id="current-path">
+			<div><? if (!isOrderPage()) { ?><?=$page['currentpath']['header']?><? } ?><?=$adminedit?></div>
+		</td>
+		<td style='padding: 5px 0 5px 15px;'>
+
+<? if (!isOrderPage()) { ?>
+
+<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.1translate.com&amp;send=false&amp;layout=button_count&amp;width=80&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:21px;" allowTransparency="true"></iframe>
+
+<!-- Place this tag where you want the +1 button to render -->
+<g:plusone size="medium"></g:plusone>
+
+<!-- Place this tag after the last plusone tag -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+<? } ?>
+
+		</td>
+	</tr>
+
+		<tr>
+
+			<td id="content">
+
+			<!-- Internal page -->
+			<!-- our translation agency -->
+						<table class="block">
+				<tr>
+					<td class="headline">
+					
+					<!-- SSL -->
+					<table>
+						<tr>
+							<td width="64%"><h1><?=$page['title']?></h1></td>
+
+							<? 
+							
+							$allowedIDs = array("8","23","16");
+							
+							if (in_array($_GET['id'],$allowedIDs)) { ?>
+
+							<td align="right"><img src="/i/icons/ssl-enabled.png" 
+							alt="SSL security for this page is enabled" 
+							title="SSL security for this page is enabled" 
+							width='32' height='32'></td>
+							<td style='font-size: 70%; font-weight: bold; text-align:center; line-height: 14px; padding-right: 10px;'>The safety of your data is ensured with SSL (HTTPS) secure connection.</td>
+
+							<? } ?>
+
+
+						</tr>
+					</table>
+					<!-- SSL -->
+					
+					</td>
+				</tr>
+				<tr>
+					<td class="block-center inner">
+
+<?
+
+errorMsg();
+eval('?>'.$page['content'].'<?');
+
+
+?>
+
+
+
+
+								</td>
+				</tr>
+				<tr>
+			    <td class="content-bottom">&nbsp;</td>
+				</tr>
+			</table>
+			<!-- end our translation agency -->
+			
+					</td>
+
+
+					<td id="right">
+			<table>
+				<tr>
+					<td class="right-menu">
+
+<?
+
+$texts = array(
+
+	"yatsiv" => array("Yuriy Yatsiv","project manager"),
+	"benko" => array("Alex Benko","project manager"),
+	"fuereder" => array("Oksana Fuereder","project manager"),
+	"karpenski" => array("Galyna Karpenski","General manager"),
+	"misikova" => array("Ludmila Misikova","interpreter"),
+	"seelhof" => array("Karin Seelhof","interpreter"),
+	"zozulya" => array("Zozulya Daria","interpreter"),
+	"prieur" => array("Roza Prieur","interpreter"),
+	"lapshin" => array("Alex Lapshin","voice artist"),
+	"badynska" => array("Anna Badynska","interpreter"),
+
+);
+
+$image = array_rand($texts);
+$personText = $texts[$image];
+
+
+if (!isOrderPage()) { ?>
+
+<H3><a href='/6/'>Meet the team</a></H3>
+
+<div class="team" style="background: url(/i/team/<? echo $image; ?>.gif) no-repeat;" title="<? echo $personText[1]; ?>">
+	<div><B><? echo str_replace(" ", "<br>", $personText[0]); ?></B></div>
+	<span><? echo $personText[1]; ?></span>
+</div>
+
+<p><br><!-- webim button <a href="/plugins/chat/client.php?locale=en" target="_blank" onclick="if(navigator.userAgent.toLowerCase().indexOf('opera') != -1 && window.event.preventDefault) window.event.preventDefault();this.newWindow = window.open('/plugins/chat/client.php?locale=en&url='+escape(document.location.href)+'&referrer='+escape(document.referrer), 'webim', 'toolbar=0,scrollbars=0,location=0,status=1,menubar=0,width=640,height=480,resizable=1');this.newWindow.focus();this.newWindow.opener=window;return false;"><img src="/plugins/chat/button.php?i=webim&amp;lang=en" border="0" width="150" height="15" alt=""/></a> / webim button --></p>
+
+<? 
+
+/*
+$ChatCode = array("",str_replace("&","&amp;",$Settings['onlinechatcode']));
+
+	echo $ChatCode[$Settings['onlinechatcode_enabled']]; */
+
+if (AreThereAnyPagesInside())	{ ?>
+
+<h3>Also in this section:</h3>
+
+<ul>
+<? 
+
+// Генерируем панель ссылок для конкретного раздела
+displayTreeV3($_GET['id'], getParentLevel($_GET['id'])); 
+
+?>
+</ul>
+
+<? } ?>
+
+<h3>Quick access:</h3>
+
+<ul>
+<?
+
+// Генерируем правое меню ссылок для быстрого доступ
+GenerateListOfSomeThing("quicklinks"); 
+
+?>
+</ul>
+
+<? } else { ?>
+
+<table style="background-color: white; height: auto; ">
+<tbody><tr><td align="right" style='width: 15%'><img width="14" height="16" src="/i/icons/ssl-enabled.1.gif" alt="SSL security for this page is enabled" title="SSL security for this page is enabled"></td>
+<td style="font-size: 70%; font-weight: bold; text-align:center; line-height: 14px; padding: 10px; color: #183D7C; ">The safety of your data is ensured with SSL (HTTPS) secure connection</td>
+</tr></tbody></table>
+
+<p>
+Please use this form to request a quote for your document translation or verbal interpreting services. It's absolutely free and without any commitments.
+</p>
+
+<p>
+After the form has been submitted, we'll answer to you in less than 24 hours guaranteed. Usually we answer even in within the next 1-2 hours during business days.
+</p>
+
+<p>
+A note regarding written translations requests: If you don't have digital (scanned) copies of your documents, you can also submit your request by mail. To do that, send everything to our address. 
+</p>
+
+Working days: Mon thru Sun<br>
+Working hours: 24h
+
+<?} ?>
+
+								</td>
+				</tr>
+				<tr>
+					<td class="banners">
+<!-- <img src="/i/banners.gif" alt="" width="173" height="247" /> -->
+								</td>
+				</tr>
+			</table>
+
+					</td>
+					
+      	</tr>
+      </table>
+		
+		</td>
+	</tr>

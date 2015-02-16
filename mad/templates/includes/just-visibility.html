@@ -1,0 +1,11 @@
+		<h3><?=$translation['38'];?>:</h3>
+			
+			<? GenerateInputTag("priority",$translation['39']); ?>
+
+		<h3><?=$translation['29'];?>:</h3>
+
+			<select name='visibility' style="width: auto;">
+				<option value='y' <? select('visibility', 'y'); ?>><?=$translation['24'];?></option>
+				<option value='n' <? select('visibility', 'n'); ?>><?=$translation['25'];?></option>
+				<option value='d' <? select('visibility', 'd'); ?>><?=$translation['26'];?></option>
+			</select><br>

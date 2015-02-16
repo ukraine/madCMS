@@ -1,0 +1,106 @@
+<html>
+<head>
+<style type="text/css">
+body, table {
+	font: 12px arial;}
+table {width: 100%; border-collapse: collapse;}
+div {
+	background-color: white;
+	width: 500px;
+	border: 1px solid #ccc;
+	padding: 0 12px;
+}
+td {
+	padding: 4px;
+	border: 0px dotted #ccc;
+	border-bottom-width: 1px;
+}
+
+b {
+	color: #0F219D;
+}
+</style>
+</head>
+<body>
+
+<div>
+<p>Hello <B>%NAME%</B>,</p>
+
+<p>Thank you for contacting us. We received your translation quote request 
+and will reply shortly. Below are the details. Please reply to this email 
+immediately if you see any inconsistencies.</p>
+
+<TABLE>
+<TR>
+	<TD colspan="2"><br><B>Request details</B></TD>
+</TR>
+<TR>
+	<TD width="40%;">Interpreter name:</TD>
+	<TD>%INTERPRETERNAME%</TD>
+</TR>
+<TR>
+	<TD>Event name:</TD>
+	<TD>%EVENTNAME%</TD>
+</TR>
+<TR>
+	<TD>Event location:</TD>
+	<TD>%EXPOLOCATION%</TD>
+</TR>
+<TR>
+	<TD>Number of days:</TD>
+	<TD>%DURATIONDAYS%</TD>
+</TR>
+<TR>
+	<TD>Special instructions:</TD>
+	<TD>%INSTRUCTIONS%</TD>
+</TR>
+<TR>
+	<TD>Discount code:</TD>
+	<TD>%DISCOUNTCODE%</TD>
+</TR>
+<TR>
+	<TD colspan="2"><br><B>Your personal info</B></TD>
+</TR>
+<TR>
+	<TD>Your phone</TD>
+	<TD>%PHONE%</TD>
+</TR>
+<TR>
+	<TD>Your email</TD>
+	<TD>%EMAIL%</TD>
+</TR>
+<TR>
+	<TD>Type of payment</TD>
+	<TD>%PAYMENTTYPE_ID%</TD>
+</TR>
+<TR>
+	<TD colspan="2"><br><B>Service information</B></TD>
+</TR>
+<TR>
+	<TD>Quote ID:</TD>
+	<TD>%QUOTE_ID%</TD>
+</TR>
+<TR>
+	<TD>IP</TD>
+	<TD><A HREF="http://www.ip2location.com/free.asp?ipaddresses=%IP%">%IP%</A></TD>
+</TR>
+<!-- <TR>
+	<TD>XIP</TD>
+	<TD><A HREF="http://www.ip2location.com/free.asp?ipaddresses=%XIP%">%XIP%</A></TD>
+</TR> -->
+<TR>
+	<TD>Referred</TD>
+	<TD>%REFERAL%</TD>
+</TR>
+
+</TABLE>
+
+
+<p>Sincerely, <br>
+1Translate.com team<br>
+requests14@1translate.com<br>
+</p>
+</div>
+
+</body>
+</html>

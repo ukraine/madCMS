@@ -1,0 +1,59 @@
+Options +FollowSymLinks +ExecCGI
+
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType application/x-javascript A290304000
+ExpiresByType text/css A290304000
+ExpiresByType image/gif A290304000
+ExpiresByType image/png A290304000
+ExpiresByType image/jpeg A290304000
+ExpiresByType text/plain A300
+ExpiresByType text/html A300
+</IfModule>
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css application/x-javascript application/javascript
+</IfModule>
+
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteCond %{HTTP_HOST} ^1translate\.com$ [NC]
+RewriteRule ^(.*)$ http://www.1translate.com/$1 [R=301,L]
+
+RewriteCond %{THE_REQUEST} ^.*/index.php
+RewriteRule ^(.*)index.php$ http://www.1translate.com/$1 [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-s
+RewriteRule ^i/logos/([a-zA-Z0-9_/-]+)\.png$	/i/logos/0.png [L]
+
+RewriteCond %{REQUEST_URI}  !^/samples.* 
+
+RewriteCond %{HTTPS} off
+RewriteCond %{REQUEST_URI} /(26|8|16)/{0,1}
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L]
+
+
+RewriteRule ^mad/$							/mad/index.php
+RewriteRule ^mad/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/([0-9]+)$		/mad/index.php?section=$1&action=$2&id=$3&%{QUERY_STRING}
+RewriteRule ^mad/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/{0,1}$			/mad/index.php?section=$1&action=$2&%{QUERY_STRING}
+RewriteRule ^mad/([a-zA-Z0-9]+)/{0,1}$					/mad/index.php?section=$1&%{QUERY_STRING}
+
+RewriteRule ^72/{0,1}$							/resources/expo-shows-in/russia-72/?%{QUERY_STRING} [R=301]
+
+RewriteRule ^16/{0,1}$							http://open.1translate.com/translators/ [R=301]
+
+RewriteRule ^([a-z/-]+)-([0-9]+)/{0,1}$					/index.php?id=$2&%{QUERY_STRING} [L]
+RewriteRule ^([0-9]+)/{0,1}$						/index.php?id=$1&%{QUERY_STRING}
+RewriteRule ^foragencies/{0,1}$						/index.php?id=7
+RewriteRule ([0-9.]+)-([a-zA-Z0-9]+)$					/index.php?id=64&amount=$1&currency=$2
+RewriteRule ^billing/([0-9.]+)-([a-zA-Z0-9]+)$				/index.php?id=38&amount=$1&currency=$2
+
+RewriteRule ^sitemap.xml$							/lib/sitemap.php
+RewriteRule ^favicon.ico$							/i/favicon.ico
+
+ErrorDocument 404								/index.php?cat_path=errors&page_path=404
+ErrorDocument 403								/index.php?cat_path=errors&page_path=403

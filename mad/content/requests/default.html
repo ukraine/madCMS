@@ -1,0 +1,101 @@
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr class="zagolovorv1"> 
+			<td width="3%" rowspan=2>#</td>
+			<td width="6%" rowspan=2>Project ID</td>
+			<td width="6%" rowspan=2><!-- <a href="<? echo "?page=$page"; ?>&sortby=wordcount&ascdesc=desc"> --> Deadline <!--  (Words) <img src="/mad/img/icons/sort_desc.gif"></a> --></td>
+
+			<td width="14%" rowspan=2>Language Pair</td>
+			<td width="14%" rowspan=2>Customer</td>
+			<td width="25%" rowspan=2>Translator / Proofreader</td>
+
+
+
+
+			<td width="12%" rowspan=2>State action</td>
+			<td width="6%" rowspan=2>State</td>
+
+			<td width="12%" colspan=2 id="finita">Actions</td>
+		</tr>
+		<tr class="zagolovorv1">
+			<td width="6%">Edit</td>
+			<td width="6%" id="fin">Delete</td>
+		</tr>
+
+
+<?
+
+
+
+for ($i=0; $i < mysql_num_rows($res); $i++)
+	
+	{
+	$number = $i+$startobject;
+
+	$pair=" class='pair'";
+	if ($number%2 !== 0) $pair="";
+
+	$f = mysql_fetch_array($res);
+
+	// ќбработка заказа по умолчанию
+	$actionrequired = $statusname = GetNameByIdAndTable($f['status_id'], "status");
+
+	$paidYorN = $prpaidYorN = $imgproof = $imgPaidTranslator = "";
+
+	if ($f['translator_paid'] != "1") $paidYorN = "_non";
+	if (!empty($f['translator_id'])) $imgPaidTranslator = "<img src='/mad/img/icons/paid{$paidYorN}.gif'>&nbsp; ";
+
+
+	if ($f['proofreader_paid'] != "1") {$prpaidYorN = "_non";}
+	if (!empty($f['proofreader_id'])) $imgproof = "<img src='/mad/img/icons/paid{$prpaidYorN}.gif'>&nbsp; ";
+
+
+	$tab = "\n\t\t\t";
+
+	// ћассив с данными о шаблоне согласно текущему статусу
+	$template = @RunQueryReturnDataArray ("templates", "WHERE status_id=$f[status_id]");
+
+	if ($template) $actionrequired = "<a href='/mad/requests/compose/$f[id]' title='Click here to process this request'>Process request</a>";
+
+	echo "\t\t<tr$pair id=\"$f[status_id]\">"
+	. "$tab<td class='columns1'><div id='80'>$number</div></td>"
+	. "$tab<td class='columns1'><div id='90'><a href='view/$f[id]' title='Word count: $f[wordcount]'><B>$f[id]</B></a></div></td>"
+
+	. "$tab<td class='columns1'><span class='deadline'" .DeadLineIsCurrentDate($f['deadline']) .">". substr($f['deadline'],0,10) ."</span> <!-- <span class='comment' id='80'>($f[wordcount])</span> --></td>"
+
+	. "$tab<td class='columns1'><div id='90'><a href='/mad/translators/?language_pair=$f[language_pair]'>".getLanguagePairById($f['language_pair'])."</a></div></td>"
+	. "$tab<td class='columns1'><a href='{$siteurl}customers/view/$f[customer_id]'>".limitVisiblePart((getNameById($f['customer_id'],'customers','lastname')." ".getNameById($f['customer_id'],'customers','firstname')))."</a></td>"
+
+	. "$tab<td class='columns1' id='left'>$imgPaidTranslator <a href='{$siteurl}translators/view/$f[translator_id]'>" .limitVisiblePart(getNameById($f['translator_id'],'translators','lastname')." ".getNameById($f['translator_id'],'translators','firstname')). "</a><br>
+	$imgproof <a href='{$siteurl}translators/view/$f[proofreader_id]'>".limitVisiblePart(getNameById($f['proofreader_id'],'translators','lastname')." ".getNameById($f['proofreader_id'],'translators','firstname'))."</a>
+	</td>"
+
+ 	. "$tab<td class='columns1' id='execute'>$actionrequired</td>"
+	. "$tab<td class='columns1'><img src='../img/status/$f[status_id].gif' title='$statusname'></td>"
+	. "$tab<td class='columns1'><a href='edit/$f[id]' class='edit'  title='Edit'>Edit</a></td>"
+	. "$tab<td class='columns1' id='end'><a href='delete/$f[id]' class='delete' onclick='return confirmDelete()' title='Delete'>Delete</a></td>"
+
+	. "\n\t\t</tr>\n";
+	}
+
+?>
+</table>
+
+<div onClick="toggle_visibility('hint')" id="hintopen"><span class="legend"><span id="openview">Show</span> legend</span></div>
+
+<div id="hint" style="display: none;">
+	<img src='/mad/img/status/1.gif'> &nbsp; &#151; &nbsp; New Order &nbsp; <BR>
+	<img src='/mad/img/status/2.gif'> &nbsp; &#151; &nbsp; Payment wait &nbsp; &nbsp; <BR>
+	<img src='/mad/img/status/3.gif'> &nbsp; &#151; &nbsp; Payment received &nbsp; &nbsp; <BR>
+
+	<img src='/mad/img/status/4.gif'> &nbsp; &#151; &nbsp; Translator wait &nbsp; &nbsp; <BR>
+	<img src='/mad/img/status/5.gif'> &nbsp; &#151; &nbsp; Translation in progress &nbsp; &nbsp; <BR>
+	<img src='/mad/img/status/6.gif'> &nbsp; &#151; &nbsp; Translated &nbsp; &nbsp; <BR>
+
+	<img src='/mad/img/status/7.gif'> &nbsp; &#151; &nbsp; Proofreader wait  &nbsp; &nbsp; <BR>
+	<img src='/mad/img/status/8.gif'> &nbsp; &#151; &nbsp; Proofreading in progress &nbsp; &nbsp; <BR>
+	<img src='/mad/img/status/9.gif'> &nbsp; &#151; &nbsp; Proofread completed &nbsp; &nbsp; <BR>
+
+	<img src='/mad/img/status/10.gif'> &nbsp; &#151; &nbsp; Completed &nbsp; &nbsp; <BR>
+	<img src='/mad/img/status/11.gif'> &nbsp; &#151; &nbsp; Cancelled &nbsp; &nbsp; <BR>
+	<img src='/mad/img/status/12.gif'> &nbsp; &#151; &nbsp; Refunded &nbsp; 
+</div>

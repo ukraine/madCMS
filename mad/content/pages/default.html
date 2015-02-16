@@ -1,0 +1,160 @@
+<form action="" method="post">
+<table width="80%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td width="4%"  class="zagolovor" rowspan=2 style='text-align:center;'><input type="checkbox" style="width:auto;" onClick="setCheckboxesByType(this.checked)"></td>
+		<td width="16%" class="zagolovor" rowspan=2><?=$translation['27'];?></td>
+		<td width="20%" class="zagolovor" rowspan=2><?=$translation['42'];?></td>
+		<td width="11%"	class="zagolovor" rowspan=2><?=$translation['43'];?></td>
+		<td width="6%" class="zagolovor" rowspan=2><?=$translation['170'];?></td>
+		<td width="6%" class="zagolovor" rowspan=2><?=$translation['28'];?></td>
+		<td width="6%" class="zagolovor" rowspan=2><?=$translation['29'];?></td>
+		<td width="22%" class="zagolovor" colspan=2 id="finita"><?=$translation['30'];?></td>
+	</tr>  
+
+	<tr>
+		<td width="8%" class="zagolovor" id="fin"><?=$translation['31'];?></td>
+		<td width="8%" class="zagolovor" id="fin"><?=$translation['32'];?></td>
+	</tr>
+
+
+<?
+
+for ($i=0; $i < mysqli_num_rows($res); $i++)
+	
+	{
+	echo "<tr>";
+	
+	$f = mysqli_fetch_array($res);
+
+	$content = limitVisiblePart('content',48);
+	$h1 = limitVisiblePart('h1',18);
+	$name = limitVisiblePart('page_name',33);
+
+	$parenturl = "/";
+
+	// Icon images
+	$keywords = "keywords";
+	$title = "title";
+	$description = "description";
+	$h1icon = "h1";
+
+	if (empty($f['keywords'])) $keywords .= "_non";
+	if (empty($f['title'])) $title .= "_non";
+	if (empty($f['description'])) $description .= "_non";
+	if (empty($f['h1'])) $h1icon .= "_non";
+	// Icon images
+
+	$number = $i+1;
+
+	echo
+	"
+	<td class='columns1' id='center'><input type='checkbox' name='id[$i]' value='$f[id]' style='width:auto;'></td>
+	<td class='columns1'>
+		<a href='?parent_id=$f[id]' style='text-decoration: underline;'>$name</a>
+		<div class='url'><a href='{$baseurl}/$f[id]/' title='$translation[147]'>{$baseurl}/$f[id]/</a>&nbsp;
+			<a href='{$baseurl}/$f[id]/' target='_blank'><img src='/mad/img/icons/popup.gif' border='0' title='$translation[33]'></a>
+		</div>
+	</td>
+
+	<td class='columns1'>$content&nbsp;</td>
+	<td class='columns1' id='center'>
+		<img src='/mad/img/icons/$title.gif' border='0' title='$translation[53]: $f[title]'> &nbsp; 
+		<img src='/mad/img/icons/$keywords.gif' border='0' title='$translation[54]: $f[keywords]'> &nbsp; 
+		<img src='/mad/img/icons/$description.gif' border='0' title='$translation[55]: $f[description]'> &nbsp; 
+		<img src='/mad/img/icons/$h1icon.gif' border='0' title='&lt;h1&gt;: $h1'>
+	</td>
+
+	<td class='columns1' id='center'>
+
+	<input
+	type='checkbox' 
+	class='autowidth'".
+	$checkbox[$f['advertise']]." 
+	onClick='MakeChanesAndSaveCheckBox(\"advertise\",$f[id], this.value, \"$section\",this)'
+
+	>
+
+	</td>
+	<td class='columns1' id='center'>"; 
+
+	// Подключение select-box-a приоритета
+	if ($Settings['custom_priorities'] == 0) include "templates/includes/priority.html";
+
+	// Или просто вывод позиции текстом
+	else echo "\t
+	<div class='priority' id='priority$f[id]' onclick='ShowChangeForm($f[id])'>
+
+	$f[priority]
+
+	</div>
+
+	<div class='changeform' id='prioritychangeform$f[id]'>
+	<input 
+	type='text' 
+	name='priority' 
+	value='$f[priority]'
+	onChange='MakeChanesAndSave(\"priority\",$f[id], this.value, \"$section\")'>
+	</div>
+	</td>
+	
+	<td class='columns1' id='center'>";
+	include "templates/includes/visibility.html"; 
+	echo "\t<span id='visibility{$f['id']}'></span>
+	</td>
+
+	<td class='columns1'><a href='edit/$f[id]?parent_id=$parent_id' class='edit'>$translation[31]</a></td>
+	<td class='columns1'>";
+
+	if ($addremove == "1") echo
+	
+	
+	"<a href='delete/$f[id]?parent_id=$parent_id' class='delete' onclick='return confirmDelete()'>$translation[32]</a>";
+	else echo "<div style='font-size:80%; text-align:center;'>нельзя<BR>удалить</a>";
+	
+	
+	echo "</td>\n</tr>";
+
+	}
+
+?>
+</table>
+
+<input type="hidden" name="action" value="massactiontoobjects">
+
+<? if ($addremove == "1") { ?>
+
+<TABLE>
+<TR>
+	<TD align="left" width="30%">
+
+		<input type="submit" name="massaction" value="<?=$translation['155'];?>" class="auto" style="margin: 0;">	
+
+	</TD>
+	<TD align="left">
+	
+	
+		<select name="parent_id" style="margin: 0;">
+		<? displayTree() ?>
+		</select>		
+
+	
+	</TD>
+	<TD align="right">
+	
+		<input type="submit" value="<?=$translation['148'];?>" class="auto">	
+	
+	</TD>
+</TR>
+</TABLE>
+
+<? } ?>
+
+</form>
+
+<div class="hint">
+	<B><?=$translation['47'];?></B>:
+	<img src='/mad/img/icons/title.gif'> &#151;   <?=$translation['44'];?> &nbsp; 
+	<img src='/mad/img/icons/keywords.gif'> &#151;   <?=$translation['45'];?>  &nbsp; 
+	<img src='/mad/img/icons/description.gif'> &#151;   <?=$translation['46'];?>  &nbsp; 
+	<img src='/mad/img/icons/popup.gif'> &#151;   <?=$translation['33'];?>
+</div>

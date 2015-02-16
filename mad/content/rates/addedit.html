@@ -1,0 +1,11 @@
+<form method="post" action="">
+        
+		<h3 id="first"><?=$translation['165'];?></h3>
+
+				<?	GenerateInputTag("name",$translation['27']);
+					GenerateInputTag("ppw", $translation['166']);
+					GenerateInputTag("fixedrate", "Fixed rate"); 
+					GenerateInputTag("issued_in", "Document must be issued in US or ex-USSR"); 
+					include "templates/includes/just-visibility.html";
+					include "templates/includes/formend.html"; ?>
+</form>

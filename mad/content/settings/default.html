@@ -1,0 +1,53 @@
+<? $f = mysql_fetch_array($res); ?>
+
+<form method="post" action="">
+ 
+		<h3 id="first"><?=$translation['72']?>:</h3>
+
+			<? 
+			GenerateInputTag("sitename",$translation['71']);
+			GenerateInputTag("email",$translation['70']);
+			GenerateInputTag("mail_address",$translation['69']);
+			GenerateInputTag("phone",$translation['68']);
+			GenerateInputTag("link_manager","Ответственный линк менеджер");
+			?>
+
+		<h3><?=$translation['139']?>:</h3>
+
+			<? 
+			GenerateInputTag("default_title",$translation['53']);
+			GenerateInputTag("default_keywords",$translation['54']);
+			GenerateInputTag("default_description",$translation['55']);
+			GenerateInputTag("newsperpage",$translation['140']);
+			GenerateInputTag("itemsontopmenu",$translation['158']);
+			GenerateInputTag("itemsonbottommenu",$translation['159']);
+			GenerateInputTag("itemsonlinkspage",$translation['178']);
+			GenerateInputTag("custom_priorities",$translation['162']);
+			?>
+
+		<br><a href="javascript:void()" onClick="MassChangeValue('pages','timestamp','NOW()')" class="javascriptlink"><?=$translation['160']?></a><br>
+
+		<h3><?=$translation['157']?>:</h3>
+		
+			<? GenerateInputTag("itemsonpage",$translation['133']); ?>
+
+		<h3><?=$translation['174']?>:</h3>
+		
+			<? GenerateInputTag("minimal_request_price",$translation['173']); ?>
+
+		<h3><?=$translation['141']?>:</h3>
+			
+			<? GenerateTextareaTag("counters"); ?>
+
+		<h3>Онлайн чат:</h3>
+
+			<? GenerateInputTag("onlinechatcode_enabled",""); ?>
+			&nbsp; &nbsp; &nbsp; HTML-код онлайн чата
+			<? GenerateTextareaTag("onlinechatcode"); ?>
+
+		<br><input type="hidden" value="do_edit" name="action">
+			<input type="hidden" value="1" name="id">
+			<input type="hidden" value="1" name="id">
+			<input type="submit" name="Submit" value="<?=$translation['73']?>">
+</form>
+

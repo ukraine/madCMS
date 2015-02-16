@@ -1,0 +1,40 @@
+<? include ("templates.php"); $from = explode("|",$Settings['link_manager']); ?>
+
+<div style='margin: 12px 0 0 265px; font-size: 90%; color: #666;'>уведомлен <? echo $f['date_message_sent']; ?></div> 
+
+<form method="post" class="view" id="sendform">
+
+<table>
+
+  <tr class='columns1'>
+    <td>From:</td>
+    <td>"<? echo $from['0']; ?>" &lt;<? echo $from['1']; ?>&gt;</td>
+  </tr>
+
+  <tr class='columns1'>
+    <td>To:</td>
+    <td>"<? ifExistGetValue('name') ?>" &lt;<? ifExistGetValue('email') ?>&gt;</td>
+  </tr>
+
+  <tr class='columns1'>
+    <td>Subject:<br>
+    <td><? $searchfor = array("http://","/"); $subject = "please change our information on your website"; echo $subject?>
+  </td>
+  </tr>
+
+	<tr class='columns1'>
+		<td colspan="2" class="textarea">
+		<textarea name="text"><? echo str_replace("%NAME%",$f['name'],$templates['namechange']); ?></textarea>
+		</td>
+	</tr>
+</table>
+
+		<input type="hidden" value="do_notify"							name="action">
+		<input type="hidden" value="<? echo $subject; ?>"				name="subject">
+		<input type="hidden" value="<? ifExistGetValue('name') ?>"		name="toname">
+		<input type="hidden" value="<? ifExistGetValue('email') ?>"		name="toemail">
+		<input type="hidden" value="<? echo $from['1']; ?>"				name="fromemail">
+		<input type="hidden" value="<? echo $from['0']; ?>"				name="fromname">
+		<input type="submit" value="Send notification"					class="sendrequest">
+
+</form>

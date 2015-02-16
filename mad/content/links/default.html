@@ -1,0 +1,120 @@
+<form action="" method="post">
+
+<table width="80%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+	<td width="4%"  class="zagolovor" rowspan=2 style='text-align:center;'><input type="checkbox" style="width:auto;" onClick="setCheckboxesByType(this.checked)"></td>
+	<td width="25%" class="zagolovor" rowspan=2><?=$translation['27'];?></td>
+	<td width="9%" class="zagolovor" colspan=1 id="finita"><?=$translation['177'];?></td>
+	<td width="6%" class="zagolovor" rowspan=2><?=$translation['28'];?></td>
+	<td width="6%" class="zagolovor" rowspan=2><?=$translation['29'];?></td>	
+	<td width="6%" class="zagolovor" rowspan=2><?=$translation['176'];?></td>
+	<td width="32%" class="zagolovor" colspan=3 id="finita"><?=$translation['30'];?></td>
+  </tr>  
+
+  <tr>
+	<td width="8%" class="zagolovor">
+	<img src='/mad/img/tableheading/presence.gif'> |
+	<img src='/mad/img/tableheading/robots.gif'> |
+	<img src='/mad/img/tableheading/meta.gif'> | 
+	<img src='/mad/img/tableheading/noindex.gif'><!--  | 
+	<img src='/mad/img/tableheading/norel.gif'> -->
+	
+	</td>
+
+		<td width="8%" class="zagolovor" id="fin"><?=$translation['175'];?></td>
+		<td width="8%" class="zagolovor" id="fin"><?=$translation['31'];?></td>
+		<td width="8%" class="zagolovor" id="fin"><?=$translation['32'];?></td>
+
+
+	</tr>
+	
+<?
+
+for ($i=0; $i < mysql_num_rows($res); $i++)
+	
+	{
+
+	$emailNone = $NotifyOrNot = "";
+	
+	$f = mysql_fetch_array($res);
+
+		if ($f['backurl']=="") $class="id='noburl'"; else $class="";
+		if ($f['robotstxt']=="1") $sign = "ok"; else $sign = "denied";
+		if ($f['metarobots']=="1") $sign1 = "ok"; else $sign1 = "denied";
+		if ($f['noindex']=="1") $sign2 = "ok"; else $sign2 = "denied";
+//		if ($f['norel']=="1") $sign3 = "ok"; else $sign3 = "denied";
+		if ($f['presence']=="1") $presense = "ok"; else $presense = "denied";
+		if ($f['ourlink'] == "http://www.1translate.com" || empty($f['email'])) $NotifyOrNot = "_none";
+		
+		if (intval($f['date_message_sent']) > "0") $NotifyOrNot = "_ied";
+
+		if (empty($f['ourlink'])) $f['ourlink'] = "none";
+		if (empty($f['email'])) $emailNone = "_none";	
+
+	echo "<tr class='visible_$f[visibility]'> 
+
+	<td class='columns1' id='center'><input type='checkbox' name='id[$i]' value='$f[id]' style='width:auto;'></td>
+	<td class='columns1' style='text-align: left'> 
+
+		" . limitVisiblePart('title',33) . "
+		
+		<div class='url'>
+
+			<img src='/mad/img/icons/". str_replace("http://www.","",$f['ourlink']) . ".gif'>&nbsp;
+			<a href='$f[url]' target='_blank'><img src='/mad/img/icons/www.gif' border='0' title='$translation[33]'></a>&nbsp;
+			<a href='mailto:$f[email]' target='_blank'><img src='/mad/img/icons/email$emailNone.gif' border='0' title='$translation[33]'></a>&nbsp;
+			<a href='notify/$f[id]'><img src='/mad/img/icons/notify$NotifyOrNot.gif' border='0'></a>&nbsp;
+		<a href='$f[backurl]' target='_blank'>". limitVisiblePart('backurl',33) ."</a>
+			
+		</div>
+
+	<td class='columns1' id='center'>
+	<img src='/mad/img/icons/$presense.gif' border='0'> &nbsp;
+	<img src='/mad/img/icons/$sign.gif' border='0'> &nbsp;
+	<img src='/mad/img/icons/$sign1.gif' border='0'> &nbsp;
+	<img src='/mad/img/icons/$sign2.gif' border='0'> &nbsp; 
+	<!-- <img src='/mad/img/icons/sign3.gif' border='0'> --></td>
+
+	<td class='columns1' id='center'>"; 
+
+	// Подключение select-box-a приоритета
+	if ($Settings['custom_priorities'] == 0) include "templates/includes/priority.html";
+
+	// Или просто вывод позиции текстом
+	else echo "\t
+	<div class='priority' id='priority$f[id]' onclick='ShowChangeForm($f[id])'>
+
+	$f[priority]
+
+	</div>
+
+	<div class='changeform' id='prioritychangeform$f[id]'>
+	<input 
+	type='text' 
+	name='priority' 
+	value='$f[priority]'
+	onChange='MakeChanesAndSave(\"priority\",$f[id], this.value, \"$section\")'>
+	</div>
+	</td>
+
+	<td class='columns1' id='center'>";
+	include "templates/includes/visibility.html"; 
+	echo "\t<span id='visibility{$f['id']}'></span>
+	</td>
+
+	<td class='columns1'><span id='grey'>". limitVisiblePart('lastcheck',10) ."</span></td>
+	<td class='columns1'><a href='check/$f[id]' class='edit'>$translation[175]</a></td>
+	<td class='columns1'><a href='edit/$f[id]?parent_id=$parent_id' class='edit'>$translation[31]</a></td>
+	<td class='columns1'><a href='delete/$f[id]?parent_id=$parent_id' class='delete' onclick='return confirmDelete()'>$translation[32]</a></td>
+	</tr>";
+	}
+
+?>
+
+</table>
+
+
+<br /><input type="submit" value="<?=$translation['148'];?>" class="auto">	
+
+
+</form>

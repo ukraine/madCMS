@@ -1,0 +1,14 @@
+<?
+
+$sql = "select id,name from `files`";
+
+$res2 = mysql_query($sql);
+
+while($col = mysql_fetch_array($res2))
+	{
+		echo "\t\t<option value=".$col['id']."";
+		select('file_id', $col['id']);
+		echo ">$col[name]</option>\n";
+	}
+
+?>

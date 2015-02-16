@@ -1,0 +1,60 @@
+<form method="post" action="">
+        
+		<h3 id="first"><span class="InnerLink" onClick="toggle_visibility('general')"><?=$translation['34'];?></span>:</h3>
+
+		<div id="general">
+			<? GenerateInputTag("page_name",$translation['27']); ?>
+			<? GenerateInputTag("page_path",$translation['36']."<span id='grey'> ($translation[48])</span>"); ?>
+
+			&nbsp; &nbsp; &nbsp; Permalink: <a href="		
+			<? echo SITEURL; ifExistGetValue('id');?>
+			/" target="_blank"><? echo "/$f[id]/"; ?></a>
+
+		</div>
+
+
+
+		
+		<h3><span class="InnerLink" onClick="toggle_visibility('seotags')"><?=$translation['52'];?></span>:</h3>
+			
+		<div id="seotags" style="display:none;">
+			<? GenerateInputTag("title",$translation['53']); ?>
+			<? GenerateInputTag("keywords",$translation['54']."<span id='grey'> ($translation[56])</span>"); ?>
+			<? GenerateInputTag("description",$translation['55']."<span id='grey'> ($translation[57])</span>"); ?>
+		</div>
+
+			<? include "templates/includes/formend.html"; ?>
+
+		<h3><?=$translation['59'];?>:</h3>
+
+			<?php 
+
+			switch($textarea) {
+
+			default:
+			
+				$oFCKeditor = new FCKeditor('content') ;
+				$oFCKeditor->BasePath = '/FCKeditor/';
+				$oFCKeditor->Value = $f['content'];
+				$oFCKeditor->Height = '450';
+				$oFCKeditor->Create(); 
+				break;
+
+			case "simple":
+
+				echo "<textarea name='content'>"; ifExistGetValue('content'); echo "</textarea>";
+				break;
+			
+			}
+
+			?>
+
+		<?	
+		GenerateInputTag("parent_id","","hidden");
+		include "templates/includes/just-visibility.html";
+		include "templates/includes/formend.html";		
+		?>
+
+
+
+</form>

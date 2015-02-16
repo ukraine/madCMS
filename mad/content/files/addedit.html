@@ -1,0 +1,16 @@
+      <form enctype="multipart/form-data" action="" method="POST">
+
+		<H3 id="first"><?=$translation['96']?> </H3>
+		<? GenerateInputTag("name",$translation['97']); ?>
+
+      <p><b><?=$translation['98']?>!!!</b>
+      <?=$translation['99']?>:
+      <b id=red>! &quot; № ; % : ? * ( ) - &amp; $ # @ + = \ / ^ - </b><br>
+      <?=$translation['100']?></p>
+
+        <input name="file" type="file"> <?=$translation['101']?>
+        <br>
+		<input type="hidden" name = "action" value = "do_upload"></input>
+        <input type="submit" value="<?=$translation['102']?>" class="sendrequest" name="submit" >
+
+      </form>

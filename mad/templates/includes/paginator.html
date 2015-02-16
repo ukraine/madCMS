@@ -1,0 +1,47 @@
+<table width="100%" class="paginator">
+	<tr>
+	<td colspan="3">
+
+<? if (@$addremove == "1") { ?>
+	<form method="GET" action="<? echo "{$siteurl}pages/add/"; ?>">
+	<INPUT TYPE="submit"  value="<? echo $translation['154'] ?>"  style="margin: 0;">
+	<INPUT TYPE="hidden"  value="<? echo $parent_id ?>" name="parent_id">
+	</form>
+<? } ?>
+
+	</td>
+	</tr>
+	<tr>
+		<td width="33%">
+		<? echo "$translation[144] <B>$startobject</B> $translation[145] <B>$endobject</B> $translation[146] <B>$count</B>"; ?></td>
+		<td width="33%"><? 
+		
+	if ($section == "requests") { ?>
+
+	<? } ?>
+		</td>
+		<td width="33%" align="right" class="paging">
+	<? 
+
+
+	if ($totalpages > 1) {
+
+		$paging="";
+
+		for($i = 0; $i < $totalpages; $i++){
+			
+			$pagenumber = $i+1;
+
+			if($i == $page)	$paging .= "<span id='currentpage'>$pagenumber</span> "; 
+			else $paging .= "<a href='{$url}page=$i'>$pagenumber</a> "; 
+
+		}
+
+		echo "$translation[143]: " . $paging;
+
+	}
+
+	?>
+	</td>
+  </tr>
+</table>

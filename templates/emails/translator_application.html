@@ -1,0 +1,170 @@
+<html>
+<head>
+<style type="text/css">
+body, table {
+	font: 12px arial;}
+table {width: 100%; border-collapse: collapse;}
+div {
+	background-color: white;
+	width: 500px;
+	border: 1px solid #ccc;
+	padding: 0 12px;
+}
+td {
+	padding: 4px;
+	border: 0px dotted #ccc;
+	border-bottom-width: 1px;
+}
+
+b {
+	color: #0F219D;
+}
+</style>
+</head>
+<body>
+
+<div>
+<p>Hello <B>%FIRSTNAME%</B>,</p>
+
+<p>This is to confirm, that we received your application. Below are 
+the details. Please reply to this email immediately if you see any 
+inconsistencies.</p>
+
+<TABLE>
+<TR>
+	<TD colspan="2"><br><B>Contact informaition</B></TD>
+</TR>
+<TR>
+	<TD width="40%;">Name:</TD>
+	<TD>%FIRSTNAME% %LASTNAME%</TD>
+</TR>
+<TR>
+	<TD>Email:</TD>
+	<TD>%EMAIL%</TD>
+</TR>
+<TR>
+	<TD>Address:</TD>
+	<TD>%ADDRESS%, %CITY%, %COUNTRY% %ZIP%</TD>
+</TR>
+<TR>
+	<TD>Phone:</TD>
+	<TD>%PHONE%</TD>
+</TR>
+<TR>
+	<TD>Cell phone:</TD>
+	<TD>%CELLPHONE%</TD>
+</TR>
+<TR>
+	<TD>Fax:</TD>
+	<TD>%FAX%</TD>
+</TR>
+
+
+<TR>
+	<TD colspan="2"><br><B>Language informaition</B></TD>
+</TR>
+
+<TR>
+	<TD>Your native language:</TD>
+	<TD>%MOTHERTONGUE%</TD>
+</TR>
+
+<TR>
+	<TD>Source language:</TD>
+	<TD>%SOURCELANGUAGE%</TD>
+</TR>
+
+<TR>
+	<TD>Target language:</TD>
+	<TD>%TARGETLANGUAGE%</TD>
+</TR>
+
+<TR>
+	<TD>Specialization:</TD>
+	<TD>%SPECIALIZATION%</TD>
+</TR>
+
+<TR>
+	<TD>DTP:</TD>
+	<TD>%DTPAPPLICATION%</TD>
+</TR>
+
+<TR>
+	<TD>Translation Memory Software:</TD>
+	<TD>%TRANSLATIONMEMORYTOOLS%</TD>
+</TR>
+
+<TR>
+	<TD colspan="2"><br><B>Financial info</B></TD>
+</TR>
+
+<TR>
+	<TD>Translation Rate per word:</TD>
+	<TD>USD $0.%TRANSLATIONPRICE%</TD>
+</TR>
+
+<TR>
+	<TD>Proofreading Rate per word:</TD>
+	<TD>USD $0.%PROOFPRICE%</TD>
+</TR>
+
+<TR>
+	<TD colspan="2"><br><B>Test translation</B></TD>
+</TR>
+
+<TR>
+	<TD colspan="2">%TESTTRANSLATION%</TD>
+</TR>
+
+<TR>
+	<TD colspan="2"><br><B>Open source translation</B></TD>
+</TR>
+
+<TR>
+	<TD colspan="2">%OPENSOURCETRANSLATION%</TD>
+</TR>
+
+<TR>
+	<TD colspan="2"><br><B>Sworn translator</B></TD>
+</TR>
+
+<TR>
+	<TD colspan="2">%SWORNTRANSLATOR%</TD>
+</TR>
+
+
+<TR>
+	<TD colspan="2"><br><B>Your comments</B></TD>
+</TR>
+
+<TR>
+	<TD colspan="2">%COMMENT%</TD>
+</TR>
+
+<TR>
+	<TD colspan="2"><br><B>Service information</B></TD>
+</TR>
+<TR>
+	<TD>IP</TD>
+	<TD><A HREF="http://www.ip2location.com/free.asp?ipaddresses=%IP%">%IP%</A></TD>
+</TR>
+<!-- <TR>
+	<TD>XIP</TD>
+	<TD><A HREF="http://www.ip2location.com/free.asp?ipaddresses=%XIP%">%XIP%</A></TD>
+</TR> -->
+<TR>
+	<TD>Referred</TD>
+	<TD>%REFERAL%</TD>
+</TR>
+
+</TABLE>
+
+
+<p>Sincerely, <br>
+1translate.com team<br>
+email: requests14@1translate.com<br>
+</p>
+</div>
+
+</body>
+</html>

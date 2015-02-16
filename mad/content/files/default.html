@@ -1,0 +1,38 @@
+<table width="600px" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td width="6%"  rowspan="2" class="zagolovor" style='text-align:center;'>#</td>
+	<td width="59%" rowspan="2" class="zagolovor"><?=$translation['27']?></td>
+	<td width="30%" colspan="2" class="zagolovor"  id="finita"><?=$translation['30'];?></td>
+  </tr>
+  <tr> 
+	<td width="20%" class="zagolovor"><?=$translation['161']?></td>
+	<td width="10%" class="zagolovor"><?=$translation['32']?></td>
+  </tr>
+
+<?
+
+for ($i=0; $i < mysql_num_rows($res); $i++)
+	
+	{
+	
+	$f = mysql_fetch_array($res);
+
+	$number = $i+1;
+
+	echo 
+	"<tr>\n<td class='columns1' id='center'>$number</td>
+	<td class='columns1'>$f[name]
+	<div class='url'><a href='$baseurl/$section/$f[path]' target='_blank'>$baseurl/$section/$f[path]</a>
+	<a href='$baseurl/$section/$f[path]' target='_blank'><img src='/mad/img/icons/popup.gif' border='0' title='$translation[33]'></a>
+	</td>
+	<td class='columns1'>
+
+	
+	<a href='javascript:void()' class='edit' onclick=\"ClipBoard('$baseurl/$section/$f[path]','$f[name]')\">$translation[161]</a></td>
+	<td class='columns1'><a href='{$siteurl}$section/delete/$f[id]' class='delete' onclick='return confirmDelete()'>$translation[32]</a></td>
+	</tr>
+	";
+	}
+
+?>
+</table>

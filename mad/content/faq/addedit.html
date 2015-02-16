@@ -1,0 +1,16 @@
+<form method="post" action="">
+        
+			<h3 id="first"><?=$translation['60'];?>:</h3>
+			<? GenerateInputTag("question",$translation['60']); ?>
+
+		<h3><?=$translation['61'];?>:</h3>
+		
+		<?	
+
+		GenerateTextAreaTag('answer'); 
+		include "templates/includes/priority-visibility.html";
+		include "templates/includes/formend.html";		
+
+		?>
+
+</form>

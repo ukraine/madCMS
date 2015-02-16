@@ -1,0 +1,26 @@
+<form method="post" action="">
+        
+			<h3 id="first"><?=$translation['62'];?>:</h3>
+			<? GenerateInputTag("title"); ?>
+
+		<h3><?=$translation['63'];?>:</h3>
+			<textarea name="content"><? ifExistGetValue('content') ?></textarea>
+
+<!-- 		<h3><?=$translation['64'];?>:</h3>
+			<select name='file_id' class="select"> 
+			<? include "inc/image-select.html"; ?>
+			</select> &nbsp; <?=$translation['65'];?> (<a href="<?=$siteurl?>files/add/" target="_blank"><?=$translation['66'];?></a>) -->
+
+		<?		include "templates/includes/priority-visibility.html";
+				include "templates/includes/formend.html";		
+		?>
+
+		<!-- <h3><?=$translation['117'];?>:</h3>
+
+			<select name='onthefirstpage' style="width: auto;">
+				<option value='1' <? select('onthefirstpage', '1'); ?>><?=$translation['24'];?></option>
+				<option value='0' <? select('onthefirstpage', '0'); ?>><?=$translation['25'];?></option>
+			</select><br> -->
+
+</form>
+

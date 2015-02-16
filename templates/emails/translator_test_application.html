@@ -1,0 +1,103 @@
+<html>
+<head>
+<style type="text/css">
+body, table {
+	font: 12px arial;}
+table {width: 100%; border-collapse: collapse;}
+div {
+	background-color: white;
+	width: 500px;
+	border: 1px solid #ccc;
+	padding: 0 12px;
+}
+td {
+	padding: 4px;
+	border: 0px dotted #ccc;
+	border-bottom-width: 1px;
+}
+
+b {
+	color: #0F219D;
+}
+</style>
+</head>
+<body>
+
+<div>
+<p>Hello <B>%NAME%</B>,</p>
+
+<p>This is to confirm, that we received your application. Below are 
+the details. Please reply to this email immediately if you see any 
+inconsistencies.</p>
+
+<TABLE>
+<TR>
+	<TD colspan="2"><br><B>Contact informaition</B></TD>
+</TR>
+<TR>
+	<TD width="40%;">Name:</TD>
+	<TD>%NAME%</TD>
+</TR>
+<TR>
+	<TD>Email:</TD>
+	<TD>%EMAIL%</TD>
+</TR>
+<TR>
+	<TD>Location:</TD>
+	<TD>%LOCATION%</TD>
+</TR>
+<TR>
+	<TD>Other contact details:</TD>
+	<TD>%SKYPE% %ICQ%</TD>
+</TR>
+
+<TR>
+	<TD colspan="2"><br><B>Test translation</B></TD>
+</TR>
+
+<TR>
+	<TD colspan="2">%TESTTRANSLATION%</TD>
+</TR>
+
+<TR>
+	<TD colspan="2"><br><B>Other info</B></TD>
+</TR>
+
+<TR>
+	<TD>Time spent, minutes:</TD>
+	<TD>%TIMESPENT%</TD>
+</TR>
+
+<TR>
+	<TD>Your comments:</TD>
+	<TD>%COMMENTS%</TD>
+</TR>
+
+
+<TR>
+	<TD colspan="2"><br><B>Service information</B></TD>
+</TR>
+<TR>
+	<TD>IP</TD>
+	<TD><A HREF="http://www.ip2location.com/free.asp?ipaddresses=%IP%">%IP%</A></TD>
+</TR>
+<!-- <TR>
+	<TD>XIP</TD>
+	<TD><A HREF="http://www.ip2location.com/free.asp?ipaddresses=%XIP%">%XIP%</A></TD>
+</TR> -->
+<TR>
+	<TD>Referred</TD>
+	<TD>%REFERAL%</TD>
+</TR>
+
+</TABLE>
+
+
+<p>Sincerely, <br>
+1translate.com team<br>
+email: requests14@1translate.com<br>
+</p>
+</div>
+
+</body>
+</html>

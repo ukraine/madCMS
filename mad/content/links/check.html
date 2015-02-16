@@ -1,0 +1,93 @@
+<p style="font-size: 140%;"><B>Валидация обратки:</B></p>
+
+<TABLE cellspacing="0">
+<TR class='columns1'>
+	<TD>Проверка сайта... </TD>
+	<TD><a href="<? echo $backURL; ?>" target="_blank"><? echo str_replace("http://","",$backURL); ?></a></TD>
+</TR>
+
+<TR class='columns1'>
+	<TD>Предмет поиска... </TD>
+	<TD><? echo str_replace("http://","",$ourURL); ?></TD>
+</TR>
+
+<TR class='columns1'>
+	<TD>Проверка физического наличия файла robots.txt ... </TD>
+	<TD><? if ($result['robotstxt'] = 0) echo "Не найден"; else {	$backPrimaryURL = parse_url($backURL); echo "Найден - <a href='http://$backPrimaryURL[host]/robots.txt' target='_blank'>просмотреть</a>"; } ?></TD>
+</TR>
+
+<TR class='columns1'>
+	<TD>Проверка физического наличия страницы (на 404)... </TD>
+	<TD><? echo $PassedOrNot[$result['404']]; ?></TD>
+</TR>
+
+
+
+<TR class='columns1'>
+	<TD>Проверка запрета в метатагах ... </TD>
+	<TD><? echo $PassedOrNot[$result['metarobots']]; ?></TD>
+</TR>
+
+<TR class='columns1'>
+	<TD>Проверка наличия ссылки в тексте ... </TD>
+	<TD><? echo $PassedOrNot[$result['presence']]; ?></TD>
+</TR>
+
+<TR class='columns1 red'>
+	<TD><B>Результат проверки</B></TD>
+	<TD>Ссылка <B><? echo $LinkVisibeOrNot[$result['visibility']] ?></B></TD>
+</TR>
+
+</TABLE>
+
+<p><div class="actions"><a href="<? echo $_SERVER['HTTP_REFERER']; ?>" style="color: #B14209;"><B>&larr;</B> вернуться назад</a> &nbsp; &nbsp; или 
+<a href="/mad/links/edit/<? echo $_GET['id']; ?>" class="editbutton">редактировать</a> 
+
+<!-- Начало уведомления -->
+<? if ($result['visibility'] == "n") { include ("templates.php"); $from = explode("|",$Settings['link_manager']); ?>
+
+<a href="javascript:void()" class="sendmail" onclick="toggle_visibility('sendform')">уведомить об отключении</a> 
+<div style='margin: 12px 0 0 265px; font-size: 90%; color: #666;'>уведомлен <? echo $f['date_message_sent']; ?></div> 
+
+<form method="post" class="view" id="sendform" style="display:none;">
+
+<table>
+
+  <tr class='columns1'>
+    <td>From:</td>
+    <td>"<? echo $from['0']; ?>" &lt;<? echo $from['1']; ?>&gt;</td>
+  </tr>
+
+  <tr class='columns1'>
+    <td>To:</td>
+    <td>"<? ifExistGetValue('name') ?>" &lt;<? ifExistGetValue('email') ?>&gt;</td>
+  </tr>
+
+  <tr class='columns1'>
+    <td>Subject:<br>
+    <td><? $searchfor = array("http://","/"); $subject = "link to " . str_replace($searchfor,"",$f['url']) . " is removed"; echo $subject?>
+  </td>
+  </tr>
+
+	<tr class='columns1'>
+		<td colspan="2" class="textarea">
+		<textarea name="text"><? echo str_replace("%NAME%",$f['name'],$templates['n']); ?></textarea>
+		</td>
+	</tr>
+</table>
+
+		<input type="hidden" value="do_notify"							name="action">
+		<input type="hidden" value="<? echo $subject; ?>"				name="subject">
+		<input type="hidden" value="<? ifExistGetValue('name') ?>"		name="toname">
+		<input type="hidden" value="<? ifExistGetValue('email') ?>"		name="toemail">
+		<input type="hidden" value="<? echo $from['1']; ?>"				name="fromemail">
+		<input type="hidden" value="<? echo $from['0']; ?>"				name="fromname">
+		<input type="submit" value="Send notification"					class="sendrequest">
+
+</form>
+<? } ?>
+
+<!-- Конец уведомления -->
+
+</div></p>
+
