@@ -16,11 +16,11 @@
 
 <?
 
-for ($i=0; $i < mysql_num_rows($res); $i++)
+for ($i=0; $i < mysqli_num_rows($res); $i++)
 	
 	{
 	$number = $i+$startobject;	
-	$f = mysql_fetch_array($res);
+	$f = mysqli_fetch_array($res);
 
 	if (empty($f['fixedrate'])) $f['fixedrate'] = "&mdash;";
 	if ($f['ppw'] == 0)		$f['ppw'] = "&mdash;";
@@ -34,10 +34,10 @@ for ($i=0; $i < mysql_num_rows($res); $i++)
 
 	<td class='columns1' id='center'>"; 
 
-	// Подключение select-box-a приоритета
+	// РџРѕРґРєР»СЋС‡РµРЅРёРµ select-box-a РїСЂРёРѕСЂРёС‚РµС‚Р°
 	if ($Settings['custom_priorities'] == 0) include "templates/includes/priority.html";
 
-	// Или просто вывод позиции текстом
+	// РР»Рё РїСЂРѕСЃС‚Рѕ РІС‹РІРѕРґ РїРѕР·РёС†РёРё С‚РµРєСЃС‚РѕРј
 	else echo "\t
 	<div class='priority' id='priority$f[id]' onclick='ShowChangeForm($f[id])'>
 
@@ -65,4 +65,4 @@ for ($i=0; $i < mysql_num_rows($res); $i++)
 	}
 
 ?>
-</table>
+</table> 
