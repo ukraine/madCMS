@@ -11,11 +11,11 @@
 
 <?
 
-for ($i=0; $i < mysql_num_rows($res); $i++)
+for ($i=0; $i < mysqli_num_rows($res); $i++)
 	
 	{
 	
-	$f = mysql_fetch_array($res);
+	$f = mysqli_fetch_array($res);
 
 	$number = $i+1;
 
