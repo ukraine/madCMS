@@ -381,7 +381,7 @@ case "do_runquery":
 		$title = $translation['167'];
 
 		// Don't change here
-		if (mysqli_query($link, str_replace("\\", "", $_POST['sql']))) return 1; else { $error_msg = $translation['138'] . mysqli_errno() . ": " .mysqli_error();  return 0; }
+		if (mysqli_query($link, str_replace("\\", "", $_POST['sql']))) return 1; else { $error_msg = $translation['138'] . mysqli_errno($link) . ": " .mysqli_error($link);  return 0; }
 		// Don't change here */
 
 

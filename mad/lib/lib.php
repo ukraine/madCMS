@@ -68,11 +68,20 @@ if (empty($error_msg)) $error_msg = "";
 if (isset($_POST['action'])) $action = $_POST['action'];
 if (in_array($section,$SqlOrderByDefaultById)) $orderby = "id";
 
+$textEditor = array(
+
+"0" => "simple",
+"1" => "CKeditor"
+
+);
+
 // Получение настроек сайта
 getSettings();
 
 // Если вдруг сбилась установка кол-ва отображаемых объектов на страницу, ставим 10 по умолчанию
 if (empty($Settings['itemsonpage'])) $Settings['itemsonpage']="10";
+
+$textarea = $textEditor[$Settings["advEditor"]];
 
 // Получаем данные о последовательности сортировки
 if (!empty($_GET['ascdesc'])) $ascdesc = $_GET['ascdesc'];
@@ -267,10 +276,9 @@ function HighLight($value, $SectionAction) {
 $copyrights = "2005 - ".date('Y')." &copy;  <a href='$Settings[softurl]'>$Settings[softname] - $translation[115]</a><br>$translation[114] $Settings[sitename]";
 
 session_start();
-/*if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!== "yes" || $ip != "79.165.24.62")  {
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!== "yes")  {
 	include "login.php";
 	exit();
 }
-*/
 
 ?>
