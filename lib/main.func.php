@@ -5,7 +5,7 @@ function listItems($items) { foreach ($items as $key=>$val) {echo "<li>$val</li>
 
 function isOrderPage() {
 
-	if ($_GET['id']=="26") return true;
+	if (!empty($_GET['id']) && $_GET['id']=="26") return true;
 
 }
 
@@ -1070,7 +1070,7 @@ function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", 
 
 	// echo $num_links;
 
-	if ($_SESSION && $_SESSION['loggedin'] == "yes") { echo mysqli_error(); }
+	if ($_SESSION && $_SESSION['loggedin'] == "yes") { echo mysqli_error($link); }
 	// else echo $_SERVER['REMOTE_ADDR'];
 
 	for ($i=0; $i<$num_links; $i++){

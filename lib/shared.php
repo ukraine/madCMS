@@ -315,7 +315,7 @@ function getCurrentPathHome($id) {
 
 	}
 
-	if ($_GET['id'] == "50" && !empty($_GET['document_type'])) {
+	if (!empty($_GET['id']) && $_GET['id'] == "50" && !empty($_GET['document_type'])) {
 
 		$sql = "
 
