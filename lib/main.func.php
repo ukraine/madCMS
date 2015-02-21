@@ -1028,7 +1028,7 @@ function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", 
 		"paymenttypes"  => array("paymenttypes",""),
 		"links"			=> array("links","",$Settings['itemsonlinkspage'],"",$startlimit),
 		"expos"			=> array("expos"," AND `city` != 'Moscow' AND `country` = 'Russia' ",$Settings['itemsonlinkspage'],"",$startlimit),
-		"relatedpages"	=> array("pages","AND `parent_id` = '9' AND `id` != '" . convertGetIdIntoPlainVar() . "","",'RAND()'),
+		"relatedpages"	=> array("pages","AND `parent_id` = '9' AND `id` != '" . convertGetIdIntoPlainVar() . "'", "",'RAND()'),
 		"tests"			=> array("tests","AND `testtranslation` !='' AND `test_id` = '$_GET[test_id]' AND `rate` = '$_GET[rate]'"),
 
 		);
@@ -1058,7 +1058,7 @@ function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", 
 	
 	";
 
-	// echo $sql;
+	if ($_SERVER['HTTP_X_REAL_IP'] == "77.41.12.151") echo $sql;
 
 	// echo "$for = $SourceOrTarget\n";
 
