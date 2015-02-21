@@ -1058,7 +1058,7 @@ function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", 
 	
 	";
 
-	if ($_SERVER['HTTP_X_REAL_IP'] == "77.41.12.151") echo $sql;
+	// if ($_SERVER['HTTP_X_REAL_IP'] == "77.41.12.151") echo $sql;
 
 	// echo "$for = $SourceOrTarget\n";
 
