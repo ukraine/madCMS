@@ -1,8 +1,10 @@
 <?
 
+// Convert an array into a <li> list 
 function listItems($items) { foreach ($items as $key=>$val) {echo "<li>$val</li>"; }}
 
 
+// Are we on the ordering page
 function isOrderPage() {
 
 	if (!empty($_GET['id']) && $_GET['id']=="26") return true;
@@ -10,6 +12,7 @@ function isOrderPage() {
 }
 
 // Ограничитель количества символов
+// Function allows limiting the number of visible characters according to a settings
 // 03.08.2007
 // 08.03.2008 threedots moved to init
 function limitVisiblePart($fieldname, $limitto="22", $threedots = "") {
@@ -20,11 +23,13 @@ function limitVisiblePart($fieldname, $limitto="22", $threedots = "") {
 }
 
 // Только для чистки URL и HTML тегов
+// Cleans URL and HTML tags
 function trimmer($variable) {
 	return trim(strip_tags(stripslashes($variable)));
 }
 
 // Проверка правильности заполнения полей
+// Form fields checker
 // 17.07.2007
 function IsRequiredFieldsFilled($RequiredFielsArray) {
 
@@ -38,6 +43,7 @@ function IsRequiredFieldsFilled($RequiredFielsArray) {
 }
 
 // Проверка наличия переменных в формах. Если есть - выводим
+// Check if there is a value was submitted through the form. If exists - show it
 // 16.07.2007
 function ifExistGetValue($valuename) {
 
@@ -47,6 +53,7 @@ function ifExistGetValue($valuename) {
 }
 
 // Функция проверки наличия ошибок
+// Checks if there is an error while submitting a form
 // 16.07.2007
 function ErrorMsg () {
 
@@ -55,12 +62,14 @@ function ErrorMsg () {
 }
 
 // Получение базовых параметров системы
+// Reads the system settings
 // 16.07.2007
 function getSettings()	{
 	global $Settings; $Settings = ExecuteSqlGetArray("SELECT * FROM `".PREFIX."settings` WHERE `id`='1'");
 }
 
 // Получение ID каталога
+// Getting catalogueID
 // 03.08.2007
 function GetCategoryId ($cat_path) {
 
