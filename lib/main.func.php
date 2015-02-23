@@ -326,41 +326,6 @@ function getNewsByID() {
 }
 
 
-/*
-
-function getRelatedLinks($CategoryId, $symbols, $quantity) {
-
-	/*
-	Version: 1.0
-	Date:		09.10.2006
-
-
-	global $RelatedLinks, $cat_path, $page_path, $siteurl;
-
-	$sql_links = "SELECT * FROM `pages` WHERE `visibility`='y' AND `cat_id` = '$CategoryId' AND `cat_id` != '4' AND `page_path` !=  '$page_path' AND `page_path` !=  'view' ORDER BY `priority` desc limit $quantity";
-
-	$sql_result = mysqli_query ($sql_links) or $error_msg = "Can't build related links tree.";
-	$num_links =  mysqli_num_rows($sql_result);
-
-	if ($num_links >= 1) $RelatedLinks = "<B>Другие страницы этого раздела:</B><br>";
-
-	for ($i=0; $i<$num_links; $i++){
-		$row = mysqli_fetch_array($sql_result);
-		$number = $i+1;
-
-		$content = strip_tags(substr(stripslashes($row["description"]), 0, 250))." ...";
-
-		$RelatedLinks .= "<div><a href='{$siteurl}$cat_path/$row[page_path].html'>$row[page_name]</a><br>$content <br><br><span><a href='{$siteurl}$cat_path/$row[page_path].html' class=\"more\">подробнее</a></span></div>";
-}
-	return $RelatedLinks;
-
-}
-
-*/
-
-
-
-
 function getSubLinks($section="default") {
 
 	global $CategoryId, $cat_path, $page_path, $link;
@@ -951,7 +916,7 @@ function getSiteMap () {
 
 function convertGetIdIntoPlainVar ($getID="") {
 
-	if (!empty($_GET['id'])) $getID = $_GET['id'];
+	if (!empty($_GET['id'])) $getID = trim($_GET['id']);
 	return $getID;
 
 }
@@ -1131,19 +1096,6 @@ function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", 
 				<td class='c3'>€". round($row['ppw'] * 500 * USDEURRATE,2) ."</td>
 				<td class='quoterequest'>request a <a href='".SITEURL."26/?area_id=$row[id]'>translation quote</a> now</td>
 			</tr>",
-
-		// Шаблон вывода таблицы с фиксированными тарифами на определенные виды документов / выдача в Рос/Укр
-/*		"fixedrates" =>
-			"
-			<tr>
-				<td class='c1' style='width:160px !important;'><a href='/50/?document_type=$row[id]&amp;document_name=$documentName'>$documentName</a></td>
-				<td class='c3' style='width:90px;'><a href='/50/?document_type=$row[id]&amp;document_name=$documentName'><img src='/i/certifiedtr/$row[name].gif' title='$documentName Certified Russian / Ukrainian translation services' alt='$documentName Certified Russian / Ukrainian translation services'></a></td>
-				<td class='c3' style='width:90px;'>$".$row['fixedrate']."</td>
-				<td class='size90 orderlink'>
-				order <a href='".SITEURL."26/?area_id=$row[id]&amp;source_id=2&amp;target_id=1'>Russian $documentName translation and certification</a><br>
-				order <a href='".SITEURL."26/?area_id=$row[id]&amp;source_id=3&amp;target_id=1'>Ukrainian $documentName translation and certification</a>
-				</td>
-			</tr>", */
 
 		// Шаблон вывода таблицы с фиксированными тарифами на определенные виды документов / выдача в Рос/Укр
 		"fixedrates" =>
