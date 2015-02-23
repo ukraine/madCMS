@@ -1,9 +1,11 @@
 <?
 
+// Превращение массива в список
 // Convert an array into a <li> list 
 function listItems($items) { foreach ($items as $key=>$val) {echo "<li>$val</li>"; }}
 
 
+// Уточнение, на странице заказа ли мы
 // Are we on the ordering page
 function isOrderPage() {
 
@@ -11,7 +13,7 @@ function isOrderPage() {
 
 }
 
-// Ограничитель количества символов
+// Ограничитель количества видимых символов в строке
 // Function allows limiting the number of visible characters according to a settings
 // 03.08.2007
 // 08.03.2008 threedots moved to init
@@ -88,6 +90,7 @@ function GetFilePath ($id) {
 }
 
 // Определение имени страницы по пути и ид категории
+// PageName Resolved by path and category_ID
 // 03.08.2007
 function GetPageName ($page_path, $cat_id) {
 
@@ -99,6 +102,7 @@ function GetPageName ($page_path, $cat_id) {
 }
 
 // Определение имени категории по ИД
+// CatName Resolved by id
 // 03.08.2007
 function GetCatName ($id) {
 
@@ -1424,9 +1428,9 @@ function CountWordsCalculateTotalPrice() {
 function AreThereAnyPagesInside() {
 
 
-//	echo GetTotalData("pages",$where=" WHERE visibility = 'y' AND `parent_id` = $_GET[id]");
+	// echo GetTotalData("pages",$where=" WHERE visibility = 'y' AND `parent_id` = $_GET[id]");
 	if (GetTotalData("pages",$where="
-		WHERE `visibility` = 'y' AND `parent_id` = $_GET[id] OR `id` = $_GET[id]")>0) return true;
+		WHERE `visibility` = 'y' AND `parent_id` = $_GET[id]") > "0") return true;
 	else return false;
 
 }
