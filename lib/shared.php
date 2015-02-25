@@ -512,4 +512,16 @@ function selectv2($field, $number)	{
 
 }
 
-?>
+// Получение базовых параметров системы
+// Reads the system settings
+// 16.07.2007
+function getSettings()	{
+	global $Settings; $Settings = ExecuteSqlGetArray("SELECT * FROM `".PREFIX."settings` WHERE `id`='1'");
+}
+
+
+// Ограничение видимой области объекта до $limitto символов
+function limitValueByChars($fieldname, $limitto, $threedots = "")	{
+	if (strlen($fieldname) > $limitto) $threedots = "...";
+	return strip_tags(utf8_substr(stripslashes($fieldname), 0, $limitto)).$threedots;;
+}

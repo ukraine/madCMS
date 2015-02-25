@@ -95,6 +95,7 @@ if ($parent_id=="-1") $addremove = "0";
 // ### Дальше пошел список служебных функций
 
 // Выполнение запроса в БД и получение результирующего массива с данными
+// Duplicate for ExecuteSqlGetArray
 function ProcessSQL($sql) { return ExecuteSqlGetArray($sql); }
 
 // Вывод класса для парной строки
@@ -103,6 +104,15 @@ function PairedLineOrNot($number, $pair=" class='pair'") {
 
 	if ($number%2 !== 0) $pair="";
 	return $pair;
+
+}
+
+// Ограничение видимой области объекта до $limitto символов
+function limitVisiblePart($fieldname, $limitto,$threedots = "") {
+
+	global $f; if (strlen($f[$fieldname]) > $limitto) $threedots = "...";
+	$fieldname = strip_tags(utf8_substr(stripslashes($f[$fieldname]), 0, $limitto)).$threedots;
+	return $fieldname;
 
 }
 
@@ -137,23 +147,6 @@ function ListChildrenIds($ids)
 	else
 		return $res;
 }
-
-
-// Ограничение видимой области объекта до $limitto символов
-function limitVisiblePart($fieldname, $limitto,$threedots = "") {
-
-	global $f; if (strlen($f[$fieldname]) > $limitto) $threedots = "...";
-	$fieldname = strip_tags(utf8_substr(stripslashes($f[$fieldname]), 0, $limitto)).$threedots;
-	return $fieldname;
-
-}
-
-// Ограничение видимой области объекта до $limitto символов
-function limitValueByChars($fieldname, $limitto, $threedots = "")	{
-	if (strlen($fieldname) > $limitto) $threedots = "...";
-	return strip_tags(utf8_substr(stripslashes($fieldname), 0, $limitto)).$threedots;;
-}
-
 
 function ChangeValue() {
 
@@ -225,11 +218,6 @@ function GenerateTextAreaTag($name)	{
 /* function selectv2($field, $number)	{
 	global $f; if($f[$field] == $number) return " selected";
 }*/
-
-
-function getSettings()	{
-	global $Settings; $Settings = ProcessSQL("SELECT * FROM `".PREFIX."settings` WHERE id='1'");
-}
 
 function ErrorMsg () {
 	global $error_msg; if (!empty($error_msg))	echo "<div class='error_msg'>$error_msg</div>"; 

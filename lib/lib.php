@@ -81,5 +81,3 @@ $adminedit="<span class='adminedit'>
 header('Last-Modified: '.$page['timestamp']);
 
 flush();
-
-?>

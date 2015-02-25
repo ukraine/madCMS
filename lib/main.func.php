@@ -63,12 +63,6 @@ function ErrorMsg () {
 	if (!empty($error_msg))	echo "<div class='error_msg' id='$status'>$error_msg</div>"; 
 }
 
-// Получение базовых параметров системы
-// Reads the system settings
-// 16.07.2007
-function getSettings()	{
-	global $Settings; $Settings = ExecuteSqlGetArray("SELECT * FROM `".PREFIX."settings` WHERE `id`='1'");
-}
 
 // Получение ID каталога
 // Getting catalogueID

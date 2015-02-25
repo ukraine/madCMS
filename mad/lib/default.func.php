@@ -66,7 +66,7 @@ function edit_data ($details, $table) {
 }
 
 // 14.12.2007
-// ����������� ������ �� ������ parent � ������
+// Transfer pages between each other
 function move_data ($objectkey, $table, $ids, $multiple="0") {
 
 	global $link;
@@ -86,8 +86,7 @@ function move_data ($objectkey, $table, $ids, $multiple="0") {
 
 
 // 21.10.2007
-// ��������� ����������� �������������� ��������
-// � ��������� ��������� ��������.
+// Removes pages and pages within a parent page
 function delete_data ($columnname, $table, $ids, $multiple="0") {
 
 	global $link;
@@ -103,5 +102,3 @@ function delete_data ($columnname, $table, $ids, $multiple="0") {
 	// Don't change here
 
 }
-
-?>
