@@ -268,5 +268,3 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!== "yes")  {
 	include "login.php";
 	exit();
 }
-
-?>

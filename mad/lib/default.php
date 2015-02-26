@@ -388,5 +388,3 @@ case "do_runquery":
 	break;
 
 }
-
-?>

@@ -156,5 +156,3 @@ function checkLink($backurl, $searchURL, $id){
 		
 		return $details;
 }
-
-?>
