@@ -124,7 +124,6 @@ $list['msk'] = array(
 	"alexander-n" => "German | 174 | 000 | higher | 135 | Health and Beauty Systems | ", // 20 yo только выходные
 	"alexandra-b" => "German | 174 | 000 | higher | 135 | MITT | ", // 20 yo
 	"liliya-k" => "German | 000 | 000 | higher | 120 | MITT | ",
-//	"viktoriya-p" => "English | 000 | 000 | higher | 125 | BIOT, TextileLegProm | VictoriaPyrlik@gmail.com",
 	"tatiana-ch" => "English, French | 150 | 000 | higher | 125 | Mosshoes | ", // edu n/a
 	"xenia-o" => "French, Spanish | 000 | 000 | higher | 125 | MITT | ",
 	"tania-k" => "German | 000 | 000 | higher | 135 | ConsumExpo | ",
