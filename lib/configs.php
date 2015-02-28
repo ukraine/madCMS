@@ -1,25 +1,19 @@
 <?
 
 // Version 1.2
+// 2/28/2015 Changed db login details vars to constants
 // 12.02.2008
 // 10.03.2008	Added Request required fields
 
 // Данные для доступа к БД
-/*
-$db_host = "mysql1058.servage.net";
-$db_user = "ifstudio52";
-$db_pass = "eJqRx67E90zWiMu";
-$db_name = "ifstudio52";
-*/
-
-// Данные для доступа к БД
-$db_host = "localhost";
-$db_user = "itranslate";
-$db_pass = "----------";
-$db_name = "itranslate";
+// DB login details
+define("DB_HOST","localhost");
+define("DB_USER", "");
+define("DB_PASS", "");
+define("DB_NAME", "");
 
 // Соединяемся и выбираем нужную базу данных
-$link = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+$link = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 // Запрещенные символы и их замена
 $ForbiddenChars = array("'", "‘ ", "`",  "'", "</textarea>", "<textarea");
@@ -49,26 +43,26 @@ $ContactEmailForm		= array("name" => "your name", "email" => "Your email address
 $QuoteRequestFields		= array("name" => "your name", "email" => "Your email address");
 // $InstantQuoteRequest	= array("source_text" => "Source text");
 $TranslatorApplication	= array(
-"lastname" => "Last name", 
-"firstname" => "First name",
-"email" => "Your e-mail address",
-"country" => "Your country",
-"phone" => "Your phone number"
+	"lastname" => "Last name", 
+	"firstname" => "First name",
+	"email" => "Your e-mail address",
+	"country" => "Your country",
+	"phone" => "Your phone number"
 );
 
 $TranslatorTestApplication	= array(
-"name" => "Your name", 
-"email" => "Your e-mail address",
-"testtranslation" => "Test translation",
+	"name" => "Your name", 
+	"email" => "Your e-mail address",
+	"testtranslation" => "Test translation",
 );
 
 $LinkSubmissionForm	= array(
-"name" => "Your name", 
-"emailo" => "Your e-mail address",
-"url" => "URL of your web-site",
-"backurl" => "URL of your web-site with our link inside",
-"title" => "Title or name of your company",
-"description" => "Description of your web-site"
+	"name" => "Your name", 
+	"emailo" => "Your e-mail address",
+	"url" => "URL of your web-site",
+	"backurl" => "URL of your web-site with our link inside",
+	"title" => "Title or name of your company",
+	"description" => "Description of your web-site"
 );
 
 
@@ -82,121 +76,112 @@ $list['moscow'] = array(
 	"bella-c" => "English, German | 170 | 39 | higher | 215 | Intercharm",
 	"xenia-v" => "English, French | 170 | 36 | higher | 215 | SvyazExpoCom",
 	"eteri" => "English, Spanish | 173 | 000 | higher | 215 | Expocamen, Moshoes", 
-//	"maria-b" => "English, Spanish | 172 | 38 | higher | 215 ", 
-
 	"vera-k" => "English | 173 | 37.5 | higher | 200 | Elektro, MITT", // edu n/a
 	"anastasia-k" => "Spanish | 179 | 39 | higher | 215 | Mirstekla",
 	"olga-max" => "English | 173 | 38 | higher | 200 | Rosupak ",
 	"xenia-kir" => "English, German | 174 | 37.5 | higher | 215 | WorldFood",
-//	"alina-y" => "English, French | 176 | 37.5 | higher | 215",
-//	"anna-b" => "English, Italian, Spanish | 180 | 40 | higher | 215",
-//	"elena-brit" => "English, Italian, German | 178 | 39 | higher | 215",
-//	"julia-f" => "English, Spanish | 172 | 37 | higher | 215 ",
-//	"viktoria-n" => "English, Spanish | 173 | 38 | 000 | 215 ",",
-//	"irina-p" => "English, German | 172 | 000 | 000 | 215 ",
 
 );
 
 $list['spb'] = array(
 
-//	"lena-n" => "English | 000 | 000 | higher | 133 | leniya_nikulina@bk.ru", // blacklisted
-	"marina-s" => "English | 000 | 000 | higher | 115 | Inavtrotrans | dzika@inbox.ru ", // 21 yo 
-	"valeria-b" => "English | 000 | 000 | higher | 125 | Tires and disks | losoulera@gmail.com", // 29 yo 
-	"yulia-v" => "German, French | 000 | 000 | higher | 133 | Interstroyexpo | julia_vasilyeva@inbox.ru", // 
-	"andy-b" => "English | 000 | 000 | higher | 133 | AgroRussia | andy.bassargin@gmail.com", // 30 yo // 
+	"marina-s" => "English | 000 | 000 | higher | 115 | Inavtrotrans | ", // 21 yo 
+	"valeria-b" => "English | 000 | 000 | higher | 125 | Tires and disks | ", // 29 yo 
+	"yulia-v" => "German, French | 000 | 000 | higher | 133 | Interstroyexpo | ", // 
+	"andy-b" => "English | 000 | 000 | higher | 133 | AgroRussia | ", // 30 yo // 
 
 );
 
 $list['ukraine'] = array(
 
-	"eugene-p" => "English | 000 | 000 | higher | 100 | n/a | e_panchuk@mail.ru", // 
-	"gene-l" => "English | 000 | 000 | higher | 120 | n/a | lucky_swan@rambler.ru", // edu n/a 
-	"ed-h" => "Hebrew, Spanish | 000 | 000 | higher | 115 | n/a | heyfetzed@rambler.ru", // 
-	"vasil-k" => "Spanish | 000 | 000 | higher | 110 | n/a | basilykrez@mail.ru", // 
+	"eugene-p" => "English | 000 | 000 | higher | 100 | n/a | ", // 
+	"gene-l" => "English | 000 | 000 | higher | 120 | n/a | ", // edu n/a 
+	"ed-h" => "Hebrew, Spanish | 000 | 000 | higher | 115 | n/a | ", // 
+	"vasil-k" => "Spanish | 000 | 000 | higher | 110 | n/a | ", // 
 
 );
 
 $list['chelyabinsk'] = array(
 
-	"maria-f" => "English, German | 000 | 000 | higher | 100 | n/a | sageeldhel@mail.ru  ",
+	"maria-f" => "English, German | 000 | 000 | higher | 100 | n/a |  ",
 
 );
 
 $list['vladivostok'] = array(
 
-	"natalia-t" => "English, French | 000 | 000 | higher | 100 | n/a | ilovecandies88@mail.ru ",
+	"natalia-t" => "English, French | 000 | 000 | higher | 100 | n/a | ",
 
 );
 
 $list['kazan'] = array(
 
-	"maria-s" => "English, Italian | 000 | 000 | higher | 150 | n/a | emci2008@gmail.com ",
+	"maria-s" => "English, Italian | 000 | 000 | higher | 150 | n/a | ",
 
 );
 
 $list['msk'] = array(
 
-	"alexander-n" => "German | 174 | 000 | higher | 135 | Health and Beauty Systems | nenilin14@mail.ru ", // 20 yo только выходные
-	"alexandra-b" => "German | 174 | 000 | higher | 135 | MITT | alexandra.borisenko@yandex.ru ", // 20 yo
-	"liliya-k" => "German | 000 | 000 | higher | 120 | MITT | kleynikova@mail.ru ",
+	"alexander-n" => "German | 174 | 000 | higher | 135 | Health and Beauty Systems | ", // 20 yo только выходные
+	"alexandra-b" => "German | 174 | 000 | higher | 135 | MITT | ", // 20 yo
+	"liliya-k" => "German | 000 | 000 | higher | 120 | MITT | ",
 //	"viktoriya-p" => "English | 000 | 000 | higher | 125 | BIOT, TextileLegProm | VictoriaPyrlik@gmail.com",
-	"tatiana-ch" => "English, French | 150 | 000 | higher | 125 | Mosshoes | tanya_chueva@mail.ru ", // edu n/a
-	"xenia-o" => "French, Spanish | 000 | 000 | higher | 125 | MITT | kseniaokisheva@mail.ru ",
-	"tania-k" => "German | 000 | 000 | higher | 135 | ConsumExpo | taniakonakova@mail.ru ",
-	"inna-s" => "Spanish | 167 | 000 | higher | 125 | MITT | inna.solskaya@mail.ru ", // 
-	"daria-a" => "English | 167 | 000 | higher | 125 | MITT | dasch.work@gmail.com ", // 30
+	"tatiana-ch" => "English, French | 150 | 000 | higher | 125 | Mosshoes | ", // edu n/a
+	"xenia-o" => "French, Spanish | 000 | 000 | higher | 125 | MITT | ",
+	"tania-k" => "German | 000 | 000 | higher | 135 | ConsumExpo | ",
+	"inna-s" => "Spanish | 167 | 000 | higher | 125 | MITT | ", // 
+	"daria-a" => "English | 167 | 000 | higher | 125 | MITT | ", // 30
 
 
 );
 
 $list['russia'] = array(
 
-	"andrey-n" => "English | 000 | 000 | higher | 111 | n/a | aheart@mail.ru ",
-	"oksana-l" => "English | 000 | 000 | higher | 111 | n/a | bsnss@inbox.ru ",
+	"andrey-n" => "English | 000 | 000 | higher | 111 | n/a | ",
+	"oksana-l" => "English | 000 | 000 | higher | 111 | n/a | ",
 
 );
 
 $list['italy'] = array(
 
-	"anna-d" => "Spanish, Italian | 000 | 000 | higher | 143 | n/a | esdyanna@gmail.com ",
-	"anna-l" => "Italian | 174 | 000 | higher | 143 | n/a | italianorusso@hotmail.com ", // 27 yo
+	"anna-d" => "Spanish, Italian | 000 | 000 | higher | 143 | n/a | ",
+	"anna-l" => "Italian | 174 | 000 | higher | 143 | n/a | ", // 27 yo
 
 );
 
 $list['voronezh'] = array(
 
-	"lyuda-z" => "English | 000 | 000 | higher | 111 | n/a | arkanar87@gmail.com ", // 1987
+	"lyuda-z" => "English | 000 | 000 | higher | 111 | n/a | ", // 1987
 
 );
 
 $list['nizhniy'] = array(
 
-	"eugene-k" => "English | 000 | 000 | higher | 111 | n/a | eugenkasarjan@mail.ru ", // 43 yo
-	"valeriy-p" => "English | 000 | 000 | higher | 121 | n/a | va_pers@mail.ru ", // 43 yo
+	"eugene-k" => "English | 000 | 000 | higher | 111 | n/a | ", // 43 yo
+	"valeriy-p" => "English | 000 | 000 | higher | 121 | n/a | ", // 43 yo
 );
 
 $list['barnaul'] = array(
 
-	"oleg-s" => "German, English | 000 | 000 | higher | 100 | n/a | schelepow.ol@yandex.ru ", // 29 yo
-	"kate-n" => "English | 000 | 000 | higher | 200 | n/a | katekind@gmail.com ", // 29 yo
+	"oleg-s" => "German, English | 000 | 000 | higher | 100 | n/a | ", // 29 yo
+	"kate-n" => "English | 000 | 000 | higher | 200 | n/a | ", // 29 yo
 
 );
 
 $list['amsterdam'] = array(
 
-	"anastasia-o" => "English, German | 000 | 000 | higher | 300 | n/a | anastasijaosina@gmail.com  ", // 1989
+	"anastasia-o" => "English, German | 000 | 000 | higher | 300 | n/a |  ", // 1989
 
 );
 
 $list['rostov'] = array(
 
-	"avgustina-p" => "English, German | 000 | 000 | higher | 111 | n/a | awgustina-p@yandex.ru ", // 1989
+	"avgustina-p" => "English, German | 000 | 000 | higher | 111 | n/a | ", // 1989
 
 );
 
 $list['ufa'] = array(
 
-	"oksana-r" => "English, German | 000 | 000 | higher | 111 | n/a | ruzhitskaya75@rambler.ru ", // 1989
+	"oksana-r" => "English, German | 000 | 000 | higher | 111 | n/a | ", // 1989
 
 );
 
@@ -207,4 +192,3 @@ define("MARKETPRICEMULTIPLIER","1.95");
 // Соотв. русским месяцам
 $Months = array("Января","Февраля","Марта","Апреля","Мая","Июня","Июля","Августа","Сентября","Октября","Ноября","Декабря");
 
-?>
