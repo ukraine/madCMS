@@ -8,7 +8,7 @@ global $parent_id, $baseurl;
 
 // ### Подключение служебных файлов
 
-include "../lib/configs.php";
+include "../lib/configuration.php";
 include "../lib/shared.php";
 include "lang/russian.php";
 

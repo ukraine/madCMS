@@ -11,7 +11,7 @@ global $siteurl, $Settings, $email, $error_msg, $link;
 /* ### I. Подключение файлов ### */
 
 // Подключение конфигурационного файла
-include "configs.php";
+include "configuration.php";
 
 // Подключение главного 
 // функционального файла
