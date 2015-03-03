@@ -4,7 +4,7 @@
 error_reporting(E_ALL);
 
 // Глобализируем некоторые вещи
-global $siteurl, $Settings, $email, $error_msg, $link;
+global $Settings, $email, $error_msg, $link;
 
 
 

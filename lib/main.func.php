@@ -25,7 +25,7 @@ function limitVisiblePart($fieldname, $limitto="22", $threedots = "") {
 }
 
 // Только для чистки URL и HTML тегов
-// Cleans URL and HTML tags
+// Cleans URL and HTML tags in a string
 function trimmer($variable) {
 	return trim(strip_tags(stripslashes($variable)));
 }
@@ -148,7 +148,7 @@ function getCatProdLinks($where="categories", $what="priority", $sort="desc", $l
 		$row = mysqli_fetch_array($sql_result);
 		$cat_name = ucfirst($row['cat_name']);
 		if ($row['cat_path'] == "default") $cat_path = ""; else $cat_path = "$row[cat_path]/";
-		$CatLinks .= "<a href='{$siteurl}$cat_path' target='Content'>$cat_name</a>$position\n";
+		$CatLinks .= "<a href='" . SITEURL . "$cat_path' target='Content'>$cat_name</a>$position\n";
 		if ($i == ($num_links-1)) $CatLinks .= ""; else $CatLinks .= "$separator";
 	}
 	echo $CatLinks;
@@ -221,7 +221,7 @@ function getRelatedLinks($CategoryId, $symbols, $quantity="999") {
 			$number = $i+1;
 
 			$content = strip_tags(substr(stripslashes($row["description"]), 0, 250))." ...";
-			$RelatedLinks .= "<a href='{$siteurl}$cat_path/$row[page_path]/' target='Content'>$number</a> &nbsp;";
+			$RelatedLinks .= "<a href='" . SITEURL . "$cat_path/$row[page_path]/' target='Content'>$number</a> &nbsp;";
 
 		}
 
@@ -870,7 +870,7 @@ function getSiteMapLinks($CategoryId) {
 
 	for ($i=0; $i<$num_links; $i++){
 		$row = mysqli_fetch_array($sql_result);
-		if ($row['page_path']!= "default" )$SiteMapLinks .= "<ol><a href='{$siteurl}$catPath/$row[page_path]/'>$row[page_name]</a></ol>";
+		if ($row['page_path']!= "default" )$SiteMapLinks .= "<ol><a href='" . SITEURL . "$catPath/$row[page_path]/'>$row[page_name]</a></ol>";
 }
 	return $SiteMapLinks;
 
@@ -883,7 +883,7 @@ function getSiteMap () {
 
 	global $siteurl, $SiteMapLinks, $catPath, $Settings, $link;
 
-	$CategoryAndPages = "<a href='$siteurl'>$Settings[sitename]</a><ul>";
+	$CategoryAndPages = "<a href='" . SITEURL . "'>$Settings[sitename]</a><ul>";
 
 	$sql_result = mysqli_query($link, "SELECT * FROM `categories` WHERE `visibility`='y' AND `cat_path` !='default' ORDER BY `priority` desc");
 	$num_links =  mysqli_num_rows($sql_result);
@@ -894,7 +894,7 @@ function getSiteMap () {
 		$row = mysqli_fetch_array($sql_result);
 		$cat_id = $row['id'];
 		$catPath = $row['cat_path'];
-		$CategoryAndPages .= "<li><a href='{$siteurl}$row[cat_path]/'>" . ucfirst($row['cat_name']) . "</a></li>\n";
+		$CategoryAndPages .= "<li><a href='" . SITEURL . " $row[cat_path]/'>" . ucfirst($row['cat_name']) . "</a></li>\n";
 		getSiteMapLinks($cat_id);
 		$CategoryAndPages .= "$SiteMapLinks";
 
@@ -936,7 +936,7 @@ function generateTopNavigationMenu($footer="",$starttag="",$endtag="") {
 		if ($i==$numberoflinktoclose) $starttag=str_replace("class='sep'","",$starttag);
 		if ($row['id'] == $getID && $footer=="") {$divTagStart = "<div>"; $divTagEnd = "</div>"; }
 		if ($row['id'] == $getID && $footer=="1") {$divTagStart = "<span>"; $divTagEnd = "</span>"; }
-		echo "\n$starttag$divTagStart<a href='{$siteurl}$row[id]/'>" . $row["page_name".LANGUAGE] . "</a>$divTagEnd$endtag ";
+		echo "\n$starttag$divTagStart<a href='" . SITEURL . " $row[id]/'>" . $row["page_name".LANGUAGE] . "</a>$divTagEnd$endtag ";
 		$divTagStart = $divTagEnd = "";
 }
 
@@ -955,7 +955,7 @@ function generateSubMenu() {
 	for ($i=0; $i<$num_links; $i++){
 
 		$row = mysqli_fetch_array($sql_result);
-		echo "<p><a href='{$siteurl}$row[id]/'>$row[page_name]</a></p>";
+		echo "<p><a href='" . SITEURL . " $row[id]/'>$row[page_name]</a></p>";
 }
 
 }

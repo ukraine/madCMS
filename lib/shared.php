@@ -82,7 +82,7 @@ function utf8_substr($str,$start)
 // Добавлен вывод только разрешенных к просмотру страниц
 function displayTree($selectlist="0", $parent="-1", $level=0) { 
 
-	global $section, $siteurl, $parent_id, $link;
+	global $section, $parent_id, $link;
 
 	$addqueries = array(
 	
@@ -100,7 +100,7 @@ function displayTree($selectlist="0", $parent="-1", $level=0) {
 
 		@$itemtemplate = array(			
 			"<option value='$row[id]'>".str_repeat($tabber,$level).$row['page_name']."</option>\n",
-			str_repeat($tabber2,$level)."<li><a href='{$siteurl}$row[id]/' title='$row[page_name]'>$row[page_name]</a>\n"
+			str_repeat($tabber2,$level)."<li><a href='" . SITEURL . "$row[id]/' title='$row[page_name]'>$row[page_name]</a>\n"
 			);
 
 		echo $itemtemplate[$selectlist];
@@ -111,7 +111,7 @@ function displayTree($selectlist="0", $parent="-1", $level=0) {
 
 			$result = mysqli_query ($link, "SELECT `name`,`id` FROM `".PREFIX."rates` WHERE `fixedrate` > '0' AND `visibility` = 'y' ORDER BY `priority` desc");
 			while ($fixedRates = mysqli_fetch_array($result)) {
-				echo "\t\t\t\t<li><a href='{$siteurl}50/?document_type=$fixedRates[id]'>$fixedRates[name]</a></li>\n";
+				echo "\t\t\t\t<li><a href='" . SITEURL . "50/?document_type=$fixedRates[id]'>$fixedRates[name]</a></li>\n";
 			} // end while
 
 			echo "\t\t\t</ul>\n";
@@ -156,7 +156,7 @@ function getOpenPath($open_id)
 
 function displayTreeV2($open_id="-1", $parent="-1", $padding="&nbsp;&nbsp;&nbsp;&nbsp;", $level=0, $front=0)
 {
-	global $siteurl, $parent_id, $link;	// DELETE ME!
+	global $parent_id, $link;	// DELETE ME!
 
 	static $open_path;
 	if($level == 0)
@@ -170,8 +170,8 @@ function displayTreeV2($open_id="-1", $parent="-1", $padding="&nbsp;&nbsp;&nbsp;
 		$page_name = limitValueByChars($row['page_name'],16);	
 
 		if ($parent_id == $row['id']) echo "{$page_name}  - <a href='edit/$row[id]?parent_id=$row[parent_id]' class='edittree'>edit</a> <br>\n";
-		elseif ($front == 0) echo("<a href='{$siteurl}pages/?parent_id={$row['id']}'>{$page_name}</a></br>\n");
-		else echo("<p><a href='{$siteurl}{$row['id']}/'>{$page_name}</a></p>\n"); 
+		elseif ($front == 0) echo("<a href='" . SITEURL . "pages/?parent_id={$row['id']}'>{$page_name}</a></br>\n");
+		else echo("<p><a href='" . SITEURL . "{$row['id']}/'>{$page_name}</a></p>\n"); 
 		
 		
 		if(in_array($row['id'], $open_path))
@@ -190,7 +190,7 @@ function displayTreeV2($open_id="-1", $parent="-1", $padding="&nbsp;&nbsp;&nbsp;
 
 function displayTreeV3($open_id="-1", $parent="-1", $padding=" &mdash; ", $level=0)
 {
-	global $siteurl, $parent_id, $link;	// DELETE ME!
+	global $parent_id, $link;	// DELETE ME!
 
 	static $open_path;
 	if($level == 0)
@@ -203,7 +203,7 @@ function displayTreeV3($open_id="-1", $parent="-1", $padding=" &mdash; ", $level
 		if($open_id == $row['id'])
 			echo(" class='current'><b>{$row['page_name']}</b></li>\n");
 		else {
-		echo ">"; echo(str_repeat($padding, $level)); echo "<a href='{$siteurl}{$row['id']}/'>{$row['page_name']}</a></li>\n";
+		echo ">"; echo(str_repeat($padding, $level)); echo "<a href='" . SITEURL . "{$row['id']}/'>{$row['page_name']}</a></li>\n";
 		}
 		/*if($open_id == $row['id']) {
 			displayTreeV3(-1, $open_id, $padding, $level+1);
@@ -256,7 +256,7 @@ function getCurrentPath($parent_id) {
 
 	if ($parent_id!="-1") {
 		$showpathtoobject['parenturl']="{$baseurl}";
-		$showpathtoobject['header']="<a href='{$siteurl}$section/'>Site</a>";
+		$showpathtoobject['header']="<a href='" . SITEURL . "$section/'>Site</a>";
 		$path = getCurrentPathArray($parent_id);
 
 	foreach($path as $key=>$val)
@@ -291,7 +291,7 @@ function getCurrentPathArrayHome($id) {
 // Получение текущего пути страницы
 function getCurrentPathHome($id) {
 
-	global $section, $baseurl, $siteurl;
+	global $section, $baseurl;
 
 	$showpathtoobject['parenturl']="{$baseurl}";
 	$showpathtoobject['header']=$DocumentName="";
