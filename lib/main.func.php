@@ -894,7 +894,7 @@ function getSiteMap () {
 		$row = mysqli_fetch_array($sql_result);
 		$cat_id = $row['id'];
 		$catPath = $row['cat_path'];
-		$CategoryAndPages .= "<li><a href='" . SITEURL . " $row[cat_path]/'>" . ucfirst($row['cat_name']) . "</a></li>\n";
+		$CategoryAndPages .= "<li><a href='" . SITEURL . "$row[cat_path]/'>" . ucfirst($row['cat_name']) . "</a></li>\n";
 		getSiteMapLinks($cat_id);
 		$CategoryAndPages .= "$SiteMapLinks";
 
@@ -936,7 +936,7 @@ function generateTopNavigationMenu($footer="",$starttag="",$endtag="") {
 		if ($i==$numberoflinktoclose) $starttag=str_replace("class='sep'","",$starttag);
 		if ($row['id'] == $getID && $footer=="") {$divTagStart = "<div>"; $divTagEnd = "</div>"; }
 		if ($row['id'] == $getID && $footer=="1") {$divTagStart = "<span>"; $divTagEnd = "</span>"; }
-		echo "\n$starttag$divTagStart<a href='" . SITEURL . " $row[id]/'>" . $row["page_name".LANGUAGE] . "</a>$divTagEnd$endtag ";
+		echo "\n$starttag$divTagStart<a href='" . SITEURL . "$row[id]/'>" . $row["page_name".LANGUAGE] . "</a>$divTagEnd$endtag ";
 		$divTagStart = $divTagEnd = "";
 }
 
@@ -955,7 +955,7 @@ function generateSubMenu() {
 	for ($i=0; $i<$num_links; $i++){
 
 		$row = mysqli_fetch_array($sql_result);
-		echo "<p><a href='" . SITEURL . " $row[id]/'>$row[page_name]</a></p>";
+		echo "<p><a href='" . SITEURL . "$row[id]/'>$row[page_name]</a></p>";
 }
 
 }
