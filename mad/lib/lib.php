@@ -8,7 +8,7 @@ global $parent_id, $baseurl;
 
 // ### Подключение служебных файлов
 
-include "../lib/configuration.php";
+include "../lib/configs.php";
 include "../lib/shared.php";
 include "lang/russian.php";
 
@@ -16,8 +16,8 @@ include "lang/russian.php";
 
 $textarea = "";
 
-$baseurl = substr($siteurl,0,-1);
-$siteurl = "/mad/";
+$baseurl = substr(SITEURL,0,-1);
+define("ADMIN_URL",SITEURL . "mad/");
 
 // Названия к кнопкам
 $ButtonNames = array(

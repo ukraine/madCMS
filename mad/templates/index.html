@@ -4,8 +4,8 @@
 	<title>madCMS</title>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta name="robots" content="noindex,nofollow">
-	<link rel="stylesheet" href="<? echo $siteurl; ?>img/_mad.css" type="text/css">
-	<script language="javascript" type="text/javascript" src="<? echo $siteurl; ?>img/mm.js"></script>
+	<link rel="stylesheet" href="<? echo ADMIN_URL; ?>img/_mad.css" type="text/css">
+	<script language="javascript" type="text/javascript" src="<? echo ADMIN_URL; ?>img/mm.js"></script>
 </head>
 <body bgcolor="#FFFFFF" text="#000000">
 
@@ -13,14 +13,14 @@
 
 	<div id="loading"><?=$translation['142']?></div>
 
-	<a href="<? echo $siteurl; ?>../" style="margin-right: 0;"><?=$translation['0']?></a>
-	<a href='<? echo $siteurl; ?>../' target='_blank' style="margin-left: 2px;"><img src='/mad/img/icons/popup.gif' border='0' title='<?=$translation['33']?>'></a>
+	<a href="<? echo ADMIN_URL; ?>../" style="margin-right: 0;"><?=$translation['0']?></a>
+	<a href='<? echo ADMIN_URL; ?>../' target='_blank' style="margin-left: 2px;"><img src='/mad/img/icons/popup.gif' border='0' title='<?=$translation['33']?>'></a>
 
 	<span>
- 		<a href="<? echo $siteurl; ?>files/"><?=$translation['1']?></a> &nbsp; &#149; &nbsp;
-		<a href="<? echo $siteurl; ?>settings/"><?=$translation['2']?></a> &nbsp; &#149; &nbsp;
-		<a href="<? echo $siteurl; ?>developers/"><?=$translation['134']?></a> &nbsp; &#149; &nbsp;
-		<a href='<? echo $siteurl; ?>login.php?do=logoff'><?=$translation['3']?></a>
+ 		<a href="<? echo ADMIN_URL; ?>files/"><?=$translation['1']?></a> &nbsp; &#149; &nbsp;
+		<a href="<? echo ADMIN_URL; ?>settings/"><?=$translation['2']?></a> &nbsp; &#149; &nbsp;
+		<a href="<? echo ADMIN_URL; ?>developers/"><?=$translation['134']?></a> &nbsp; &#149; &nbsp;
+		<a href='<? echo ADMIN_URL; ?>login.php?do=logoff'><?=$translation['3']?></a>
 	</span>
 
 </div>
@@ -29,28 +29,20 @@
 		
 	<div class="headerbtns">
 
-		<a href="<? echo $siteurl; ?>" id="home"	<? if ($section =='default')	echo 'class=current';	?>><?=$translation['4']?></a>
-		<a href="<? echo $siteurl; ?>pages/"		<? if ($section =='pages')		echo 'class=current';	?>><?=$translation['5']?></a>
-		<a href="<? echo $siteurl; ?>languages/"	<? if ($section =='languages')	echo 'class=current';	?>><?=$translation['168']?></a>
+		<a href="<? echo ADMIN_URL; ?>" id="home"	<? if ($section =='default')	echo 'class=current';	?>><?=$translation['4']?></a>
+		<a href="<? echo ADMIN_URL; ?>pages/"		<? if ($section =='pages')		echo 'class=current';	?>><?=$translation['5']?></a>
+		<a href="<? echo ADMIN_URL; ?>languages/"	<? if ($section =='languages')	echo 'class=current';	?>><?=$translation['168']?></a>
 
 
 		<div class="morelinks">
 
-			<a href="<? echo $siteurl; ?>paymenttypes/" onMouseOver="hiLite('payments','a2','Payment types')" onMouseOut="hiLite('payments','a1','')">
+			<a href="<? echo ADMIN_URL; ?>paymenttypes/" onMouseOver="hiLite('payments','a2','Payment types')" onMouseOut="hiLite('payments','a1','')">
 			<img src="/mad/img/icons/payments_off.gif" name="payments"></a>
 
-			<a href="<? echo $siteurl; ?>rates/" onMouseOver="hiLite('rates','a4','Our rates')" onMouseOut="hiLite('rates','a3','')">
+			<a href="<? echo ADMIN_URL; ?>rates/" onMouseOver="hiLite('rates','a4','Our rates')" onMouseOut="hiLite('rates','a3','')">
 			<img src="/mad/img/icons/rates_off.gif" name="rates"></a>
 
-<!--			<a href="<? echo $siteurl; ?>templates/" onMouseOver="hiLite('templates','a6','Email templates')" onMouseOut="hiLite('templates','a5','')">
-			<img src="/mad/img/icons/templates_off.gif" name="templates"></a>
-
-			<a href="<? echo $siteurl; ?>status/" onMouseOver="hiLite('status','a8','Workflow')" onMouseOut="hiLite('status','a7','')">
-			<img src="/mad/img/icons/workflow_off.gif" name="status"></a> -->
-
 		</div>
-
-
 
 	</div>
 
