@@ -57,11 +57,6 @@ function openCloseAccess() {
 
 		elseif ($_REQUEST['do'] == "logoff")	{
 
-			// Стираем данные о сессии из таблицы настроек
-			/* $details['admin_session_id'] = "";
-			$details['id'] = "1";
-			edit_data ($details, "settings"); */
-
 			// Удаляем сессию
 			session_start();
 			session_destroy();
@@ -83,7 +78,7 @@ if (!empty($_REQUEST['action'])) @sendNewPass();
 <html>
 <head>
 <title><?=$translation['82']?></title>
-<link rel="stylesheet" href="<? echo $siteurl; ?>img/_mad.css" type="text/css">
+<link rel="stylesheet" href="<?=ADMIN_URL; ?>img/_mad.css" type="text/css">
 <SCRIPT type="text/javascript" language="JavaScript"> 
 	function toggle_visibility(id) {
 	var e = document.getElementById(id);
