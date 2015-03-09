@@ -1,6 +1,6 @@
 <?
 
-global $link, $url, $siteurl, $loggedin;
+global $link, $url, $loggedin;
 $error_msg = $translation['95'];
 
 if (isset($_SERVER['HTTP_REFERER'])) $url = $_SERVER['HTTP_REFERER'];

@@ -27,7 +27,7 @@
   <tr>
     <td class="column1">Customer
     </td>
-    <td class='column2'><a href="<? echo "{$siteurl}customers/view/$f[customer_id]"; ?>"><? echo limitVisiblePart((getNameById($f['customer_id'],'customers','lastname')." ".getNameById($f['customer_id'],'customers','firstname'))); ?></a> (<? echo GetTotalData('requests', "WHERE customer_id = $f[customer_id]"); ?>)
+    <td class='column2'><a href="<? echo ADMIN_URL . "customers/view/$f[customer_id]"; ?>"><? echo limitVisiblePart((getNameById($f['customer_id'],'customers','lastname')." ".getNameById($f['customer_id'],'customers','firstname'))); ?></a> (<? echo GetTotalData('requests', "WHERE customer_id = $f[customer_id]"); ?>)
   </td>
   </tr>
 
@@ -45,12 +45,12 @@
 	
 	<tr>
 		<td class="column1">Translator</td>
-		<td class='column2'><a href="<? echo "{$siteurl}translators/view/$f[translator_id]"; ?>"><? echo getNameById($f['translator_id'],'translators','lastname')." ".getNameById($f['translator_id'],'translators','firstname'); ?></a> ($<? echo round($f['wordcount']*$f['ppwt'],2); ?> / $<? ifExistGetValue('ppwt');?>)</td>
+		<td class='column2'><a href="<? echo ADMIN_URL . "translators/view/$f[translator_id]"; ?>"><? echo getNameById($f['translator_id'],'translators','lastname')." ".getNameById($f['translator_id'],'translators','firstname'); ?></a> ($<? echo round($f['wordcount']*$f['ppwt'],2); ?> / $<? ifExistGetValue('ppwt');?>)</td>
 	</tr>
 	
 	<tr>
 		<td class="column1">Proofreader</td>
-		<td class='column2'><a href="<? echo "{$siteurl}translators/view/$f[proofreader_id]"; ?>"><? echo getNameById($f['proofreader_id'],'translators','lastname')." ".getNameById($f['proofreader_id'],'translators','firstname'); ?></a> ($<? echo round($f['wordcount']*$f['ppwp'],2); ?>)</td>
+		<td class='column2'><a href="<? echo ADMIN_URL . "translators/view/$f[proofreader_id]"; ?>"><? echo getNameById($f['proofreader_id'],'translators','lastname')." ".getNameById($f['proofreader_id'],'translators','firstname'); ?></a> ($<? echo round($f['wordcount']*$f['ppwp'],2); ?>)</td>
 	</tr>
 
 <tr><td colspan="2"><h4>Translation details</h4></td></tr>

@@ -29,7 +29,7 @@ for ($i=0; $i < mysqli_num_rows($res); $i++)
 
 	
 	<a href='javascript:void()' class='edit' onclick=\"ClipBoard('$baseurl/$section/$f[path]','$f[name]')\">$translation[161]</a></td>
-	<td class='columns1'><a href='{$siteurl}$section/delete/$f[id]' class='delete' onclick='return confirmDelete()'>$translation[32]</a></td>
+	<td class='columns1'><a href='" . ADMIN_URL. "$section/delete/$f[id]' class='delete' onclick='return confirmDelete()'>$translation[32]</a></td>
 	</tr>
 	";
 	}

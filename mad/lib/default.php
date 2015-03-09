@@ -111,7 +111,7 @@ case "do_add":
 	$tolocation = "/";
 
 	if ($section == "pages") $tolocation .= "?parent_id=$_GET[parent_id]";
-	$location = $siteurl.$section.$tolocation;
+	$location = ADMIN_URL.$section.$tolocation;
 		
 	// print_r($_SERVER['QUERY_STRING']);
 

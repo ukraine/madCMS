@@ -3,7 +3,7 @@
 	<td colspan="3">
 
 <? if (@$addremove == "1") { ?>
-	<form method="GET" action="<? echo "{$siteurl}pages/add/"; ?>">
+	<form method="GET" action="<? echo ADMIN_URL. "pages/add/"; ?>">
 	<INPUT TYPE="submit"  value="<? echo $translation['154'] ?>"  style="margin: 0;">
 	<INPUT TYPE="hidden"  value="<? echo $parent_id ?>" name="parent_id">
 	</form>
