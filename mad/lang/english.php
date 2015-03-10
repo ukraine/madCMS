@@ -185,5 +185,6 @@ $translation = array(
 "Check",
 "Checked",
 "Fraud",
-"Items per page" 
+"Items per page",
+"enableAdvEditor" => "Enable CKEditor",
 );
