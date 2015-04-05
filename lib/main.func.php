@@ -536,22 +536,9 @@ Don't forget to add our email to your whitelist.</p>
 
 			// Отправляем уведомление по почте
 			EmailFormSubmitter2($emailTemplate);
+
+			header("Location: " . SITEURL . "26?success=1&quote_id=$_POST[quote_ID]");
 	
-			// Уведомление об отправке
-			$error_msg = "<p><B>Your message was successfully sent</B>.<br>
-			You should receive a copy of it in your email within 5-10 minutes.</p>
-
-<p>If you don't receive a reply from us within 24 hours,
-please email us directly at requests14@1translate.com
-and include this tracking number <B>$_POST[quote_ID]</B>.
-Don't forget to add our email to your whitelist.</p>
-			
-			
-			";
-
-			// Возвращаем статус об успехе операции
-			$estimatedetails['status'] = "1";
-
 		} 
 
 		break;
