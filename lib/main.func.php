@@ -6,10 +6,10 @@ function listItems($items) { foreach ($items as $key=>$val) {echo "<li>$val</li>
 
 
 // Уточнение, на странице заказа ли мы
-// Are we on the ordering page
+// Are we on the ordering page // Ugly function, added by zakhar php assistant 4/17/2015
 function isOrderPage() {
 
-	if (!empty($_GET['id']) && $_GET['id']=="26") return true;
+	if (!empty($_GET['id']) && $_GET['id']=="26" || !empty($_GET['id']) && $_GET['id']=="81" || !empty($_GET['id']) && $_GET['id']=="82") return true;
 
 }
 
@@ -953,6 +953,36 @@ function GetMicroTime() {
 	return ((float)$usec + (float)$sec); 
 }
 
+/*function switchLabel($docId) { // ZAKHARCHENKO FUNCTIONS 4/17/2015
+	$buttonLabel = 'Add to cart';
+	foreach ($_SESSION['cart'] as $id => $quantity) {
+		if ($id == $docId) {
+			$buttonLabel = 'Add more';
+			return $buttonLabel;
+		}
+	}
+	return $buttonLabel;
+}
+
+function showMark($docId) {
+	$markBlock = null;
+	foreach ($_SESSION['cart'] as $id => $quantity) {
+		if ($id == $docId) {
+			$markBlock = "<div class='message-block'>Added to cart (<span>{$quantity}</span>)</div>";
+			return $markBlock;
+		}
+	}
+}
+
+function showRemoveButton($docId) {
+	$removeButton = null;
+	foreach ($_SESSION['cart'] as $id => $quantity) {
+		if ($id == $docId) {
+			$removeButton = "<button name='remove-from-cart' class='remove-from-cart' data-value='{$docId}'>Remove</button>";
+			return $removeButton;
+		}
+	}
+}*/
 
 function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", $SourceOrTarget="source_id", $stlimit="0",$cat="", $getID="") {
 
@@ -1029,7 +1059,10 @@ function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", 
 
 	// echo $num_links;
 
-	if ($_SESSION && $_SESSION['loggedin'] == "yes") { echo mysqli_error($link); }
+	//if ($_SESSION && $_SESSION['loggedin'] == "yes")
+	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == "yes") {
+		echo mysqli_error($link);
+	}
 	// else echo $_SERVER['REMOTE_ADDR'];
 
 	for ($i=0; $i<$num_links; $i++){
@@ -1079,7 +1112,7 @@ function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", 
 			</tr>",
 
 		// Шаблон вывода таблицы с фиксированными тарифами на определенные виды документов / выдача в Рос/Укр
-		"fixedrates" =>
+		"fixedrates.old" =>
 			"
 			<tr>
 				<td class='c1' style='width:180px !important;'>
@@ -1108,6 +1141,44 @@ function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", 
 
  				order <a href='".SITEURL."26/?area_id=$row[id]&amp;source_id=2&amp;target_id=1'>Russian $documentName translation and certification</a><br>
 				order <a href='".SITEURL."26/?area_id=$row[id]&amp;source_id=3&amp;target_id=1'>Ukrainian $documentName translation and certification</a>
+				</td>
+			</tr>",
+
+		// Шаблон вывода таблицы с фиксированными тарифами на определенные виды документов / выдача в Рос/Укр
+		"fixedrates" =>
+			"
+			<tr>
+				<td class='c1' style='width:180px !important;'>
+				
+					<a href='/50/?document_type=$row[id]&amp;document_name=$documentNameURL&amp;issued_in=$row[issued_in]'><img src='/i/certifiedtr/$row[name].gif' title='$documentName Certified Russian / Ukrainian translation services' alt='$documentName Certified Russian / Ukrainian translation services'></a>
+
+					<br><br>
+					
+					<a href='/50/?document_type=$row[id]&amp;document_name=$documentNameURL&amp;issued_in=$row[issued_in]'><b>$documentName</b></a>
+
+					<div class='retailPrice'>Market Value: <span>$$row[retailPrice]</span></div>
+					<div class='redPrice'>Our Price: <B>$$row[fixedrate]</B></div>
+
+				</td>
+
+				<td class='size90 orderlink' valign='middle'>
+
+					<div class='cart-button-conteiner'>" . showMark($row['id']) .
+					
+					"<button name='add-to-cart' class='add-to-cart' data-value='$row[id]'
+					title='Order Russian/Ukrainian to English $documentName translation and certification'
+					>"
+					
+					. switchLabel($row['id']) . "</button>" . 
+					showRemoveButton($row['id']) .
+
+					"<form action='../cart/point.php' method='POST'>
+						<input type='hidden' name='doc_id' value='{$row['id']}'>
+						<button class='add-to-cart' name='buyInClick' title='Buy Russian/Ukrainian to English $documentName translation and certification in a click'>Buy in a click</button>
+					</form>
+					</div>
+
+
 				</td>
 			</tr>",
 
@@ -1146,7 +1217,7 @@ function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", 
 
 
 		// Шаблон вывода таблицы с фиксированными тарифами на определенные виды документов / выданы в США
-		"fixedrates_us" =>
+		"fixedrates_us.old" =>
 			"
 			<tr>
 				<td class='c1' style='width:180px;'>
@@ -1161,6 +1232,35 @@ function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", 
 				></a>				
 				
 				
+				</div></td>
+				
+				<td class='size90 orderlink'>
+				order <a href='".SITEURL."26/?area_id=$row[id]&amp;source_id=2&amp;target_id=1&amp;issued_in=$row[issued_in]'>English to Russian $documentName translation and certification</a><br>
+				order <a href='".SITEURL."26/?area_id=$row[id]&amp;source_id=3&amp;target_id=1&amp;issued_in=$row[issued_in]'>English to Ukrainian $documentName translation and certification</a>
+				</td>
+			</tr>",
+
+		// Шаблон вывода таблицы с фиксированными тарифами на определенные виды документов / выданы в США
+		"fixedrates_us" =>
+			"
+			<tr>
+				<td class='c1' style='width:180px;'>
+				
+				<a href='/50/?document_type=$row[id]&amp;document_name=$documentNameURL&amp;issued_in=$row[issued_in]'><img src='/i/certifiedtr/$row[name].gif' title='$documentName Certified English to Russian / Ukrainian translation services' alt='$documentName Certified English to Russian / Ukrainian translation services'></a>
+				<br><br>
+				<a href='/50/?document_type=$row[id]&amp;document_name=$documentNameURL&amp;issued_in=$row[issued_in]'><b>$documentName</b></a><div class='redPrice'> Price: <B>$$row[fixedrate]</B>
+				
+				<br><a href='".SITEURL."26/?area_id=$row[id]&amp;source_id=2&amp;target_id=1'><img src='/i/order-now.png'
+				alt='Order English to Russian/Ukrainian $documentName translation and certification'
+				title='Order English to Russian/Ukrainian $documentName translation and certification'
+				></a><div class='cart-button-conteiner'>" . showMark($row['id']) .
+				"<button name='add-to-cart' class='add-to-cart' data-value='$row[id]'>" . switchLabel($row['id']) . "</button>" .
+				showRemoveButton($row['id']) .
+				"<form action='../cart/point.php' method='POST'>
+					<input type='hidden' name='doc_id' value='{$row['id']}'>
+					<button class='add-to-cart' name='buyInClick'>Buy in a click</button>
+				</form>
+				</div>
 				</div></td>
 				
 				<td class='size90 orderlink'>
