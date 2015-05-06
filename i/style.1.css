@@ -1,8 +1,4 @@
- 
- 
-
- @media screen and (min-width: 980px) {
-	 @import url("../cart/protected/css/cart-style.css");
+@import url("../cart/protected/css/cart-style.css");
 
 body {margin: 0; padding: 0; background: #265EC1 url(/i/bg.gif) repeat-x;}
 body, td, p {font: 12px Tahoma, Arial, Verdana;}
@@ -111,7 +107,11 @@ textarea {width: 100%;}
 	background: url("/i/sprite-v1.gif") -22px -361px no-repeat; 
 }
 
-
+@media all and (-webkit-min-device-pixel-ratio:0) {
+  #top-menu table {
+  	background: url("/i/sprite-v1.gif") -11px -361px no-repeat; 
+  }
+}
 
 #top-menu td {
 	text-align: center;
@@ -1167,23 +1167,4 @@ table td em {
 
 .instructions li {
 	margin: 12px 0;
-}
- }
-@media screen and (max-width: 979px) {
-  a { margin: 5px; padding: 5px; }
-  html { width: 320px;}
-  body { position: absolute; width: 320px !important; overflow:hidden; }
-  body > * {
-	float: left;
-	width: 100%;
-	overflow: hidden;
-}
-  table, td, tr, th { display: block; }
-  body * { width: 280px !important; margin:0px; padding: 0px; float:left; display:block; clear:both; -webkit-appearance:none; }
-  li { list-style:none; }
-}
-@media all and (-webkit-min-device-pixel-ratio:0) {
-  #top-menu table {
-  	background: url("/i/sprite-v1.gif") -11px -361px no-repeat; 
-  }
 }
