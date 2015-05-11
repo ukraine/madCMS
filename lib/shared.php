@@ -510,6 +510,8 @@ function selectv2($field, $number)	{
 
 	if($field == $number) return " selected";
 
+	// echo "$field = $number \n";
+
 }
 
 // Получение базовых параметров системы
@@ -524,10 +526,4 @@ function getSettings()	{
 function limitValueByChars($fieldname, $limitto, $threedots = "")	{
 	if (strlen($fieldname) > $limitto) $threedots = "...";
 	return strip_tags(utf8_substr(stripslashes($fieldname), 0, $limitto)).$threedots;;
-}
-
-function unDefault($path, $result="") {
-
-	if ($path != "default") $result = "/$path"; return $result;
-
 }

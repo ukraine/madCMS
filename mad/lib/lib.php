@@ -2,8 +2,6 @@
 
 error_reporting(E_ALL);
 
-// $ip = "79.165.24.62";
-
 global $parent_id, $baseurl;
 
 // ### Подключение служебных файлов
@@ -172,11 +170,11 @@ function sendmail ($subject, $str="")	{
 
 // Генерация тега select
 // 03.08.2007
-function GenerateSelectList($WhatWhatTableToSelect, $nameOfIdentificatorAutoToSelect, $nameofvaluetoshow)	{
+function GenerateSelectList($WhatTableToSelect, $nameOfIdentificatorAutoToSelect, $nameofvaluetoshow)	{
 
 	global $link;
 
-	$res = mysqli_query($link, "select * from `".PREFIX."$WhatWhatTableToSelect`");
+	$res = mysqli_query($link, "select * from `".PREFIX."$WhatTableToSelect`");
 
 	$select = "<select name='$nameOfIdentificatorAutoToSelect'>";
 	
@@ -184,6 +182,26 @@ function GenerateSelectList($WhatWhatTableToSelect, $nameOfIdentificatorAutoToSe
 		$select .= "\t\t<option value='".$col['id']."'";
 		$select .= selectv2($nameOfIdentificatorAutoToSelect, $col['id']);
 		$select .= ">$col[$nameofvaluetoshow]</option>\n";
+	}
+
+	return $select."</select>";
+
+}
+
+// Генерация тега select
+// 03.08.2007
+function GenerateSelectListV2($tableToSelect, $nameOfIdentificatorAutoToSelect="issued_in", $valueToShow="country")	{
+
+	global $link, $f;
+
+	$res = mysqli_query($link, "SELECT * FROM `" . PREFIX . "$tableToSelect`");
+
+	$select = "<select name='$nameOfIdentificatorAutoToSelect'>";
+	
+	while($col = mysqli_fetch_array($res))	{
+		$select .= "\t\t <option value='$col[id]' ";
+		$select .= selectv2($f[$nameOfIdentificatorAutoToSelect], $col['id']);
+		$select .= ">$col[$valueToShow]</option>\n";
 	}
 
 	return $select."</select>";

@@ -6,7 +6,7 @@ function listItems($items) { foreach ($items as $key=>$val) {echo "<li>$val</li>
 
 
 // Уточнение, на странице заказа ли мы
-// Are we on the ordering page // Ugly function, added by zakhar php assistant 4/17/2015
+// Are we on the ordering page
 function isOrderPage() {
 
 	if (!empty($_GET['id']) && $_GET['id']=="26" || !empty($_GET['id']) && $_GET['id']=="81" || !empty($_GET['id']) && $_GET['id']=="82") return true;
@@ -536,9 +536,9 @@ Don't forget to add our email to your whitelist.</p>
 
 			// Отправляем уведомление по почте
 			EmailFormSubmitter2($emailTemplate);
-
-			header("Location: " . SITEURL . "26?success=1&quote_id=$_POST[quote_ID]");
 	
+			header("Location: " . SITEURL . "26?success=1&quote_id=$_POST[quote_ID]");
+
 		} 
 
 		break;
@@ -953,37 +953,6 @@ function GetMicroTime() {
 	return ((float)$usec + (float)$sec); 
 }
 
-/*function switchLabel($docId) { // ZAKHARCHENKO FUNCTIONS 4/17/2015
-	$buttonLabel = 'Add to cart';
-	foreach ($_SESSION['cart'] as $id => $quantity) {
-		if ($id == $docId) {
-			$buttonLabel = 'Add more';
-			return $buttonLabel;
-		}
-	}
-	return $buttonLabel;
-}
-
-function showMark($docId) {
-	$markBlock = null;
-	foreach ($_SESSION['cart'] as $id => $quantity) {
-		if ($id == $docId) {
-			$markBlock = "<div class='message-block'>Added to cart (<span>{$quantity}</span>)</div>";
-			return $markBlock;
-		}
-	}
-}
-
-function showRemoveButton($docId) {
-	$removeButton = null;
-	foreach ($_SESSION['cart'] as $id => $quantity) {
-		if ($id == $docId) {
-			$removeButton = "<button name='remove-from-cart' class='remove-from-cart' data-value='{$docId}'>Remove</button>";
-			return $removeButton;
-		}
-	}
-}*/
-
 function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", $SourceOrTarget="source_id", $stlimit="0",$cat="", $getID="") {
 
 	global $Settings, $startlimit, $link;
@@ -1004,6 +973,7 @@ function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", 
 		"rateshome"		=> array("rates","",3),
 		"rates"			=> array("rates","AND `fixedrate` = 0","","`name` ASC"),
 		"rates_eur"		=> array("rates","AND `fixedrate` = 0","","`name` ASC"),
+		"fixedrates_new"=> array("rates","AND `fixedrate` != 0 AND `issued_in` = 0","","`name` ASC"),
 		"fixedrates"	=> array("rates","AND `fixedrate` != 0 AND `issued_in` = 0","","`name` ASC"),
 		"fixedrates_euro"=> array("rates","AND `fixedrate` != 0 AND `issued_in` = 0","","`name` ASC"),
 		"fixedrates_us"	=> array("rates","AND `fixedrate` != 0 AND `issued_in` = 1","","`name` ASC"),
@@ -1072,7 +1042,7 @@ function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", 
 		$number = $i+1;
 
 		@$row['page_name'] = str_replace("/"," ", $row['page_name']);
-		@$row['retailPrice'] = $row['fixedrate']*1.2;
+		@$row['retailPrice'] = $row['fixedrate']*1.5;
 
 		@$documentName = rtrim($row['name'],"s");
 		@$documentNameURL = str_replace(" ","-",$documentName);
@@ -1112,7 +1082,7 @@ function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", 
 			</tr>",
 
 		// Шаблон вывода таблицы с фиксированными тарифами на определенные виды документов / выдача в Рос/Укр
-		"fixedrates.old" =>
+		"fixedrates" =>
 			"
 			<tr>
 				<td class='c1' style='width:180px !important;'>
@@ -1144,8 +1114,9 @@ function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", 
 				</td>
 			</tr>",
 
+
 		// Шаблон вывода таблицы с фиксированными тарифами на определенные виды документов / выдача в Рос/Укр
-		"fixedrates" =>
+		"fixedrates_new" =>
 			"
 			<tr>
 				<td class='c1' style='width:180px !important;'>
@@ -1169,13 +1140,10 @@ function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", 
 					title='Order Russian/Ukrainian to English $documentName translation and certification'
 					>"
 					
-					. switchLabel($row['id']) . "</button>" . 
+					. switchLabel($row['id']) . "</button>" .
 					showRemoveButton($row['id']) .
 
-					"<form action='../cart/point.php' method='POST'>
-						<input type='hidden' name='doc_id' value='{$row['id']}'>
-						<button class='add-to-cart' name='buyInClick' title='Buy Russian/Ukrainian to English $documentName translation and certification in a click'>Buy in a click</button>
-					</form>
+					"<br>or <a href='../cart/point.php?document_id={$row['id']}&type=fast' name='buyInClick' title='Buy Russian/Ukrainian to English $documentName translation and certification in a click'>buy in a click</a>
 					</div>
 
 
@@ -1215,7 +1183,6 @@ function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", 
 				</td>
 			</tr>",
 
-
 		// Шаблон вывода таблицы с фиксированными тарифами на определенные виды документов / выданы в США
 		"fixedrates_us.old" =>
 			"
@@ -1248,24 +1215,27 @@ function GenerateListOfSomeThing($for, $limit="", $orderby = "`priority` DESC", 
 				
 				<a href='/50/?document_type=$row[id]&amp;document_name=$documentNameURL&amp;issued_in=$row[issued_in]'><img src='/i/certifiedtr/$row[name].gif' title='$documentName Certified English to Russian / Ukrainian translation services' alt='$documentName Certified English to Russian / Ukrainian translation services'></a>
 				<br><br>
-				<a href='/50/?document_type=$row[id]&amp;document_name=$documentNameURL&amp;issued_in=$row[issued_in]'><b>$documentName</b></a><div class='redPrice'> Price: <B>$$row[fixedrate]</B>
+				<a href='/50/?document_type=$row[id]&amp;document_name=$documentNameURL&amp;issued_in=$row[issued_in]'><b>$documentName</b></a>
+
+					<div class='retailPrice'>Market Value: <span>$$row[retailPrice]</span></div>
+					<div class='redPrice'>Our Price: <B>$$row[fixedrate]</B></div>				
 				
-				<br><a href='".SITEURL."26/?area_id=$row[id]&amp;source_id=2&amp;target_id=1'><img src='/i/order-now.png'
-				alt='Order English to Russian/Ukrainian $documentName translation and certification'
-				title='Order English to Russian/Ukrainian $documentName translation and certification'
-				></a><div class='cart-button-conteiner'>" . showMark($row['id']) .
-				"<button name='add-to-cart' class='add-to-cart' data-value='$row[id]'>" . switchLabel($row['id']) . "</button>" .
-				showRemoveButton($row['id']) .
-				"<form action='../cart/point.php' method='POST'>
-					<input type='hidden' name='doc_id' value='{$row['id']}'>
-					<button class='add-to-cart' name='buyInClick'>Buy in a click</button>
-				</form>
-				</div>
-				</div></td>
+				</td>
 				
 				<td class='size90 orderlink'>
-				order <a href='".SITEURL."26/?area_id=$row[id]&amp;source_id=2&amp;target_id=1&amp;issued_in=$row[issued_in]'>English to Russian $documentName translation and certification</a><br>
-				order <a href='".SITEURL."26/?area_id=$row[id]&amp;source_id=3&amp;target_id=1&amp;issued_in=$row[issued_in]'>English to Ukrainian $documentName translation and certification</a>
+
+
+
+
+<div class='cart-button-conteiner'>" . showMark($row['id']) .
+				"<button name='add-to-cart' class='add-to-cart' data-value='$row[id]'>" . switchLabel($row['id']) . "</button>" .
+				
+				showRemoveButton($row['id']) .
+				
+				"<br>or <a href='../cart/point.php?document_id={$row['id']}&type=fast' name='buyInClick' title='Buy Russian/Ukrainian to English $documentName translation and certification in a click'>buy in a click</a>
+
+				</div>
+
 				</td>
 			</tr>",
 

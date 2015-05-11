@@ -4,8 +4,8 @@
 
 				<?	GenerateInputTag("name",$translation['27']);
 					GenerateInputTag("ppw", $translation['166']);
-					GenerateInputTag("fixedrate", "Fixed rate"); 
-					GenerateInputTag("issued_in", "Document must be issued in US or ex-USSR"); 
+					GenerateInputTag("fixedrate", "Фиксированный тариф"); 
+					echo GenerateSelectListV2("countries","issued_in")."Страна выдачи документа";
 					include "templates/includes/just-visibility.html";
 					include "templates/includes/formend.html"; ?>
 </form>
