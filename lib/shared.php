@@ -1,5 +1,7 @@
 <?
 
+// test comment
+
 // Выполняем запрос и получаем массив с требуемыми данными
 // 14.07.2007
 function ExecuteSqlGetArray($sql) {
