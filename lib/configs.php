@@ -30,7 +30,7 @@ $siteurl = "//".$_SERVER['HTTP_HOST']."/";
 define("PREFIX", "madcms_");
 define("SITEURL", $siteurl);
 define("FILESTORAGEPATH", $_SERVER['DOCUMENT_ROOT']."/files/customerfiles/");
-define("URLSTORAGEPATH", SITEURL."files/customerfiles/");
+define("URLSTORAGEPATH", "https:" . SITEURL."files/customerfiles/");
 define("SHOWINTERPRETERSEVERY", "4");
 define("USDEURRATE", "0.79");
 define("TESTRATES", "13");
